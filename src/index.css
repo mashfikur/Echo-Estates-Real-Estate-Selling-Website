@@ -17,3 +17,11 @@ body {
 .font-playfair {
   font-family: "Playfair Display", serif;
 }
+
+.error {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

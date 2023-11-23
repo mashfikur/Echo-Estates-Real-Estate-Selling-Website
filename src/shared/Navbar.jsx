@@ -152,6 +152,7 @@ function Navbar(props) {
                       borderRadius: "25px",
                     }}
                     endIcon={<LoginIcon></LoginIcon>}
+                    
                   >
                     Login
                   </Button>
