@@ -6,6 +6,10 @@
 
 /* google fonts */
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
   font-family: "Libre Franklin", sans-serif;
 }
