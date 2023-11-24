@@ -1,10 +1,13 @@
 import {
+  Button,
   Container,
   Grid,
   ImageList,
   ImageListItem,
   Typography,
 } from "@mui/material";
+
+import ExploreIcon from "@mui/icons-material/Explore";
 
 const Banner = () => {
   const itemData = [
@@ -25,13 +28,23 @@ const Banner = () => {
             >
               Resonating Dreams, Building Tomorrows
             </Typography>
-            <Typography
-              sx={{ mt:"2rem",fontWeight:"700" }}
-              variant="h4"
-              
-            >
+            <Typography sx={{ mt: "2rem", fontWeight: "700" }} variant="h4">
               Your Home, Your Future.
             </Typography>
+
+            <Button
+              sx={{
+                borderRadius: "1.5rem",
+                mt: "1.5rem",
+                backgroundColor: "#323377",
+                py: ".6rem",
+              }}
+              variant="contained"
+              color="primary"
+              endIcon={<ExploreIcon></ExploreIcon>}
+            >
+              Explore Now
+            </Button>
           </Grid>
           <Grid item xs={12} md={5}>
             <ImageList
@@ -46,7 +59,12 @@ const Banner = () => {
                   cols={item.cols || 1}
                   rows={item.rows || 4}
                 >
-                  <img style={{objectFit:"cover"}} src={item} alt={item.title} loading="lazy" />
+                  <img
+                    style={{ objectFit: "cover" }}
+                    src={item}
+                    alt={item.title}
+                    loading="lazy"
+                  />
                 </ImageListItem>
               ))}
             </ImageList>

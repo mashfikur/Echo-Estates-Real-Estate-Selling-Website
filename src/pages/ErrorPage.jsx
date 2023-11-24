@@ -1,6 +1,7 @@
 import { Button, Container, Typography } from "@mui/material";
 import erroGif from "../assets/images/error.jpg";
 import { NavLink } from "react-router-dom";
+import HouseIcon from "@mui/icons-material/House";
 
 const ErrorPage = () => {
   return (
@@ -19,7 +20,12 @@ const ErrorPage = () => {
           </Typography>
           <img style={{ width: "60%", margin: "" }} src={erroGif} alt="" />
           <NavLink to="/">
-            <Button variant="contained" color="success">
+            <Button
+              startIcon={<HouseIcon></HouseIcon>}
+              variant="contained"
+              color="success"
+              sx={{borderRadius:"20px"}}
+            >
               Go Home
             </Button>
           </NavLink>

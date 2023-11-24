@@ -1,4 +1,4 @@
-import { Button, Container, Typography } from "@mui/material";
+import {  Container, Typography } from "@mui/material";
 import mainLogo from "../assets/images/main-logo.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -32,7 +32,7 @@ const Footer = () => {
           <LinkedInIcon></LinkedInIcon>
         </div>
         <div>
-          <Typography variant="body1">
+          <Typography align="center" variant="body1">
             © {new Date().getFullYear()} Echo Estates . All rights reserved{" "}
           </Typography>
         </div>

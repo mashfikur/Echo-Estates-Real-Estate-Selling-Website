@@ -53,17 +53,17 @@ function Navbar(props) {
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton href="/" sx={{ textAlign: "center" }}>
+          <ListItemButton href="/demo" sx={{ textAlign: "center" }}>
             <ListItemText primary={"All Properties"} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton href="/" sx={{ textAlign: "center" }}>
+          <ListItemButton href="/demo" sx={{ textAlign: "center" }}>
             <ListItemText primary={"Dashboard"} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton href="/" sx={{ textAlign: "center" }}>
+          <ListItemButton href="/demo" sx={{ textAlign: "center" }}>
             <ListItemText primary={"Login"} />
           </ListItemButton>
         </ListItem>
@@ -145,6 +145,7 @@ function Navbar(props) {
                 <NavLink to="/demo">
                   <Button
                     variant="contained"
+                    color="primary"
                     sx={{
                       color: "#fff",
                       px: "1.5rem",
