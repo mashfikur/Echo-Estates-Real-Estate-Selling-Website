@@ -1,28 +1,65 @@
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
 import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
+import { updateProfile } from "firebase/auth";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Register = () => {
-  const [showPass, setShowPass] = useState(false);
-  const {user,setUser}=useAuth()
+  const [showPass, setShowPass, setLoading] = useState(false);
+  const { user, setUser, createUser } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
 
     //creating user in firebase
-    
+    createUser(data.email, data.password)
+      .then((result) => {
+        toast.success("Created Account Successfully");
+        // updating user info to firebase
+        updateProfile(result.user, {
+          displayName: data.name,
+          photoURL: data.photo,
+        })
+          .then(() => {
+            setUser({ ...user, displayName: data.name, photoURL: data.photo });
+            reset();
 
+            // adding user into database
+            const userInfo = {
+              userName: data.name,
+              email: data.email,
+              userId: result.user.uid,
+              role: "user",
+            };
 
+            axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
+              if (res.data.insertedId) {
+                navigate("/");
+              }
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        toast.error(err.code);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
