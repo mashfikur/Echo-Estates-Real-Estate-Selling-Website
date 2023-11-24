@@ -40,5 +40,12 @@ body {
   font-weight: 700;
   background-color: green;
   border-radius: 20px;
+}
 
+.register-bg {
+  background-image: url("../src/assets/images/register-bg.png");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
