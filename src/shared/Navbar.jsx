@@ -129,7 +129,12 @@ function Navbar(props) {
 
               <Box
                 sx={{
-                  display: { xs: "none", sm: "block" },
+                  display: {
+                    xs: "none",
+                    sm: "flex",
+                    alignItems: "center",
+                    gap: "1rem",
+                  },
                   fontFamily: '"Libre Franklin", sans-serif',
                 }}
               >

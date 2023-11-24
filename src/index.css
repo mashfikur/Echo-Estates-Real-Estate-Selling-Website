@@ -36,6 +36,9 @@ body {
 }
 
 .active button {
-  color: green !important;
-  text-decoration: underline;
+  color: white !important;
+  font-weight: 700;
+  background-color: green;
+  border-radius: 20px;
+
 }
