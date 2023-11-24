@@ -79,7 +79,7 @@ const Login = () => {
                   <FcGoogle className="text-xl"></FcGoogle> Sign In With Google
                 </button>
 
-                <p className="my-4 ">
+                <p className="my-4 text-center">
                   New on this website ? Please{" "}
                   <Link to="/register" className=" font-semibold underline">
                     {" "}
