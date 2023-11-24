@@ -14,17 +14,38 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { Container, createTheme } from "@mui/material";
+import {
+  Avatar,
+  Container,
+  Menu,
+  MenuItem,
+  Tooltip,
+  createTheme,
+} from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import mainLogo from "../assets/images/main-logo.png";
 import { Link, NavLink } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
+import useAuth from "../hooks/useAuth";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { ColorRing } from "react-loader-spinner";
 
 const drawerWidth = 240;
 
 function Navbar(props) {
+  const { user, loading } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -97,7 +118,14 @@ function Navbar(props) {
       >
         <ThemeProvider theme={theme}>
           <Container maxWidth="xl">
-            <Toolbar sx={{ color: "#000" }}>
+            <Toolbar
+              sx={{
+                color: "#000",
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {/* menu icon */}
               <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -106,7 +134,18 @@ function Navbar(props) {
                 sx={{ mr: 2, display: { sm: "none" } }}
               >
                 <MenuIcon />
+                <div className="flex items-center gap-2 ml-4 md:hidden">
+                  <img style={{ width: "2rem" }} src={mainLogo}></img>
+                  <Typography
+                    sx={{ fontFamily: '"Playfair Display", serif' }}
+                    variant="h6"
+                  >
+                    Echo Estates
+                  </Typography>
+                </div>
               </IconButton>
+
+              {/* website logo */}
 
               <Typography
                 variant="h6"
@@ -127,6 +166,8 @@ function Navbar(props) {
                 Echo Estates
               </Typography>
 
+              {/* navitems */}
+
               <Box
                 sx={{
                   display: {
@@ -141,28 +182,114 @@ function Navbar(props) {
                 <NavLink to="/">
                   <Button sx={{ color: "#000" }}>Home</Button>
                 </NavLink>
-                <NavLink to="/demo">
-                  <Button sx={{ color: "#000" }}>All Properties</Button>
-                </NavLink>
-                <NavLink to="/demo">
-                  <Button sx={{ color: "#000" }}>Dashboard</Button>
-                </NavLink>
-                <Link to="/login">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    sx={{
-                      color: "#fff",
-                      px: "1.5rem",
-                      py: ".5rem",
-                      borderRadius: "25px",
-                      backgroundColor: "#323377",
-                    }}
-                    endIcon={<LoginIcon></LoginIcon>}
+                {loading ? (
+                  <ColorRing
+                    visible={true}
+                    height="60"
+                    width="60"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={[
+                      "#323377",
+                      "#505690",
+                      "#6E79A9",
+                      "#9AADCE",
+                      "#D6F2FF",
+                    ]}
+                  />
+                ) : user ? (
+                  <>
+                    <NavLink to="/demo">
+                      <Button sx={{ color: "#000" }}>All Properties</Button>
+                    </NavLink>
+                    <NavLink to="/demo">
+                      <Button sx={{ color: "#000" }}>Dashboard</Button>
+                    </NavLink>
+                  </>
+                ) : (
+                  <>
+                    <Link to="/login">
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{
+                          color: "#fff",
+                          px: "1.5rem",
+                          py: ".5rem",
+                          borderRadius: "25px",
+                          backgroundColor: "#323377",
+                        }}
+                        endIcon={<LoginIcon></LoginIcon>}
+                      >
+                        Login
+                      </Button>
+                    </Link>
+                  </>
+                )}
+              </Box>
+
+              {/* user avatar */}
+
+              <Box sx={{ flexGrow: 0, ml: "1rem" }}>
+                <Tooltip title="Open settings">
+                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <Avatar alt="User Image" src={user?.photoURL} />
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: "45px" }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
+                  <MenuItem
+                    sx={{ textAlign: "center" }}
+                    onClick={handleCloseUserMenu}
                   >
-                    Login
-                  </Button>
-                </Link>
+                    <div className="mx-auto space-y-4">
+                      <Typography
+                        sx={{ mx: "auto" }}
+                        variant="h5"
+                        align="center"
+                      >
+                        {user?.displayName}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          mx: "auto",
+                          border: "2px solid",
+                          borderRadius: "20px",
+                          p: ".4rem",
+                        }}
+                        variant="subtitle2"
+                        align="center"
+                      >
+                        {user?.email}
+                      </Typography>
+                    </div>
+                  </MenuItem>
+
+                  <MenuItem onClick={handleCloseUserMenu}>
+                    <Button
+                      endIcon={<LogoutIcon></LogoutIcon>}
+                      variant="contained"
+                      color="error"
+                    >
+                      Logout
+                    </Button>
+                  </MenuItem>
+                </Menu>
               </Box>
             </Toolbar>
           </Container>
