@@ -5,9 +5,11 @@ import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { IoMdEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
+import useAuth from "../hooks/useAuth";
 
 const Register = () => {
   const [showPass, setShowPass] = useState(false);
+  const {user,setUser}=useAuth()
   const {
     register,
     handleSubmit,
@@ -16,11 +18,16 @@ const Register = () => {
 
   const onSubmit = (data) => {
     console.log(data);
+
+    //creating user in firebase
+    
+
+
   };
 
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="register-bg">
@@ -90,7 +97,7 @@ const Register = () => {
                   />
                   <span
                     onClick={() => setShowPass(!showPass)}
-                    className="absolute cursor-pointer right-0 top-1/2 pr-4 mt-3"
+                    className="absolute cursor-pointer right-0 top-1/2 pr-4 "
                   >
                     {showPass ? (
                       <IoIosEyeOff className="text-lg"></IoIosEyeOff>
