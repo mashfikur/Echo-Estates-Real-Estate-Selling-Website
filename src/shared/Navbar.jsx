@@ -144,14 +144,13 @@ function Navbar(props) {
                 </NavLink>
                 <NavLink to="/demo">
                   <Button
-                    
                     variant="contained"
                     sx={{
                       color: "#fff",
                       px: "1.5rem",
                       py: ".5rem",
                       borderRadius: "25px",
-                      backgroundColor:"#323377"
+                      backgroundColor: "#323377",
                     }}
                     endIcon={<LoginIcon></LoginIcon>}
                   >
