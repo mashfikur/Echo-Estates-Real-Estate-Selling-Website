@@ -17,7 +17,7 @@ import Button from "@mui/material/Button";
 import { Container, createTheme } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import mainLogo from "../assets/images/main-logo.png";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 
 const drawerWidth = 240;
@@ -142,7 +142,7 @@ function Navbar(props) {
                 <NavLink to="/demo">
                   <Button sx={{ color: "#000" }}>Dashboard</Button>
                 </NavLink>
-                <NavLink to="/demo">
+                <Link to="/login">
                   <Button
                     variant="contained"
                     color="primary"
@@ -157,7 +157,7 @@ function Navbar(props) {
                   >
                     Login
                   </Button>
-                </NavLink>
+                </Link>
               </Box>
             </Toolbar>
           </Container>
