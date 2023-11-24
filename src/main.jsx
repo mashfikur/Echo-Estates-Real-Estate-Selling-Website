@@ -5,10 +5,15 @@ import router from "./routes/router.jsx";
 import { RouterProvider } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
+import theme from "./shared/Themes.jsx";
+import { ThemeProvider } from "@mui/material";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <HelmetProvider>
-      <RouterProvider router={router} />
-    </HelmetProvider>
+    <ThemeProvider theme={theme}>
+      <HelmetProvider>
+        <RouterProvider router={router} />
+      </HelmetProvider>
+    </ThemeProvider>
   </React.StrictMode>
 );

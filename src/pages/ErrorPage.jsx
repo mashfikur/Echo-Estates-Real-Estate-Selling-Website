@@ -1,5 +1,6 @@
 import { Button, Container, Typography } from "@mui/material";
 import erroGif from "../assets/images/error.jpg";
+import { NavLink } from "react-router-dom";
 
 const ErrorPage = () => {
   return (
@@ -17,9 +18,11 @@ const ErrorPage = () => {
             THIS PAGE IS CURRENTLY UNAVIALBLE
           </Typography>
           <img style={{ width: "60%", margin: "" }} src={erroGif} alt="" />
-          <Button href="/" variant="contained" color="success">
-            Go Home
-          </Button>
+          <NavLink to="/">
+            <Button variant="contained" color="success">
+              Go Home
+            </Button>
+          </NavLink>
         </div>
       </Container>
     </div>

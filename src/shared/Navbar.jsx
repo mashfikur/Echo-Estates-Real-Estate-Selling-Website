@@ -83,7 +83,7 @@ function Navbar(props) {
   });
 
   return (
-    <Box sx={{ display: "flex", mt: "6rem" }}>
+    <Box sx={{ display: "flex" }}>
       <CssBaseline />
 
       <AppBar
@@ -93,6 +93,7 @@ function Navbar(props) {
           paddingBottom: ".4rem",
         }}
         component="nav"
+        position="fixed"
       >
         <ThemeProvider theme={theme}>
           <Container maxWidth="xl">
@@ -118,7 +119,7 @@ function Navbar(props) {
                   fontSize: "2rem",
                   alignItems: "center",
                   gap: "1rem",
-                  color: "#654",
+                  color: "#323377",
                   fontWeight: "700",
                 }}
               >
@@ -143,16 +144,16 @@ function Navbar(props) {
                 </NavLink>
                 <NavLink to="/demo">
                   <Button
-                    color="success"
+                    
                     variant="contained"
                     sx={{
                       color: "#fff",
                       px: "1.5rem",
                       py: ".5rem",
                       borderRadius: "25px",
+                      backgroundColor:"#323377"
                     }}
                     endIcon={<LoginIcon></LoginIcon>}
-                    
                   >
                     Login
                   </Button>
