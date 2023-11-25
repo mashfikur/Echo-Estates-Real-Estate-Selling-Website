@@ -2,7 +2,17 @@ import { Button, Container, TextField } from "@mui/material";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import NearMeIcon from "@mui/icons-material/NearMe";
+import { useRef } from "react";
+import toast from "react-hot-toast";
 const OurLocation = () => {
+  const locationRef = useRef();
+  const handleRequest = () => {
+    locationRef.current.value = "";
+    setTimeout(() => {
+      toast.success("We will review your request");
+    }, 500);
+  };
+
   const position = [40.712776, -74.005974];
   const position2 = [40.744459, -73.982708];
   const position3 = [40.772412, -74.069912];
@@ -24,12 +34,14 @@ const OurLocation = () => {
             </p>
             <div className="flex flex-col lg:flex-row items-center w-full gap-4 ">
               <TextField
+                inputRef={locationRef}
                 id="outlined-basic"
                 label=" Request Location"
                 variant="outlined"
                 sx={{ width: "60%" }}
               />
               <Button
+                onClick={handleRequest}
                 sx={{ py: ".5rem", borderRadius: "35px" }}
                 variant="contained"
                 endIcon={<NearMeIcon></NearMeIcon>}
