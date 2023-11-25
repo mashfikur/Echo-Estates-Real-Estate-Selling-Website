@@ -7,9 +7,6 @@ import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
@@ -52,6 +49,17 @@ function Navbar(props) {
     setMobileOpen((prevState) => !prevState);
   };
 
+  // logout function
+  const handleLogOut = () => {
+    userSignOut()
+      .then(() => {
+        toast.success("Logged Out Successfully");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
+
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography
@@ -68,27 +76,29 @@ function Navbar(props) {
         Echo Estates
       </Typography>
       <Divider />
-      <List>
-        <ListItem disablePadding>
-          <ListItemButton href="/" sx={{ textAlign: "center" }}>
-            <ListItemText primary={"Home"} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton href="/demo" sx={{ textAlign: "center" }}>
-            <ListItemText primary={"All Properties"} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton href="/demo" sx={{ textAlign: "center" }}>
-            <ListItemText primary={"Dashboard"} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton href="/demo" sx={{ textAlign: "center" }}>
-            <ListItemText primary={"Login"} />
-          </ListItemButton>
-        </ListItem>
+      <List
+        className="space-y-6 "
+        sx={{ display: "flex", flexDirection: "column" }}
+      >
+        <NavLink to="/" className={"mt-5"}>
+          Home
+        </NavLink>
+        <NavLink to="/all-properties">All Properties</NavLink>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+        {user ? (
+          <>
+            <NavLink
+              className={"text-red-600 font-semibold"}
+              onClick={handleLogOut}
+            >
+              Logout
+            </NavLink>
+          </>
+        ) : (
+          <>
+            <NavLink to="/login">Login</NavLink>
+          </>
+        )}
       </List>
     </Box>
   );
@@ -103,17 +113,6 @@ function Navbar(props) {
       },
     },
   });
-
-  // logout function
-  const handleLogOut = () => {
-    userSignOut()
-      .then(() => {
-        toast.success("Logged Out Successfully");
-      })
-      .catch((err) => {
-        toast.error(err.code);
-      });
-  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -242,6 +241,7 @@ function Navbar(props) {
               </Box>
 
               {/* user avatar */}
+
               {user && (
                 <Box sx={{ flexGrow: 0, ml: "1rem" }}>
                   <Tooltip title="Open settings">
