@@ -3,10 +3,10 @@ import UpcomingIcon from "@mui/icons-material/Upcoming";
 
 const Blogs = () => {
   return (
-    <div className="my-40">
+    <div className=" my-24 lg:my-40">
       <Container maxWidth="xl">
         <div className="text-center">
-          <h3 className="font-playfair text-5xl mb-4">
+          <h3 className="font-playfair text-3xl font-semibold md:text-5xl mb-4 underline">
             Insights & Inspiration
           </h3>
           <p className="font-semibold text-gray-400">

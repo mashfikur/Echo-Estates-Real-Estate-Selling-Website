@@ -19,8 +19,8 @@ const Banner = () => {
 
   return (
     <div className="banner">
-      <Container sx={{ pt: "10rem" }} maxWidth="xl">
-        <Grid container spacing={2}>
+      <Container sx={{ pt: { xs: "7rem",md:"10rem" } }} maxWidth="xl">
+        <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
             <Typography
               sx={{ fontFamily: '"Playfair Display", serif' }}

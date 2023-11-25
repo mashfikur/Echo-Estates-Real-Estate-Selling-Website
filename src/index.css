@@ -43,6 +43,14 @@ body {
   padding: 0.5rem 1.5rem;
 }
 
+.active button:hover {
+  color: white !important;
+  font-weight: 700;
+  background-color: green;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+}
+
 .register-bg {
   background-image: url("../src/assets/images/register-bg.png");
   min-height: 100vh;

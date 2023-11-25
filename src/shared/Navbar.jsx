@@ -193,10 +193,10 @@ function Navbar(props) {
                 <NavLink to="/">
                   <Button sx={{ color: "#000" }}>Home</Button>
                 </NavLink>
-                <NavLink to="/demo">
+                <NavLink to="/all-properties">
                   <Button sx={{ color: "#000" }}>All Properties</Button>
                 </NavLink>
-                <NavLink to="/demo">
+                <NavLink to="/dashboard">
                   <Button sx={{ color: "#000" }}>Dashboard</Button>
                 </NavLink>
 
