@@ -29,11 +29,12 @@ import LoginIcon from "@mui/icons-material/Login";
 import useAuth from "../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { ColorRing } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 const drawerWidth = 240;
 
 function Navbar(props) {
-  const { user, loading } = useAuth();
+  const { user, loading, userSignOut } = useAuth();
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -102,6 +103,17 @@ function Navbar(props) {
       },
     },
   });
+
+  // logout function
+  const handleLogOut = () => {
+    userSignOut()
+      .then(() => {
+        toast.success("Logged Out Successfully");
+      })
+      .catch((err) => {
+        toast.error(err.code);
+      });
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -182,6 +194,13 @@ function Navbar(props) {
                 <NavLink to="/">
                   <Button sx={{ color: "#000" }}>Home</Button>
                 </NavLink>
+                <NavLink to="/demo">
+                  <Button sx={{ color: "#000" }}>All Properties</Button>
+                </NavLink>
+                <NavLink to="/demo">
+                  <Button sx={{ color: "#000" }}>Dashboard</Button>
+                </NavLink>
+
                 {loading ? (
                   <ColorRing
                     visible={true}
@@ -199,14 +218,7 @@ function Navbar(props) {
                     ]}
                   />
                 ) : user ? (
-                  <>
-                    <NavLink to="/demo">
-                      <Button sx={{ color: "#000" }}>All Properties</Button>
-                    </NavLink>
-                    <NavLink to="/demo">
-                      <Button sx={{ color: "#000" }}>Dashboard</Button>
-                    </NavLink>
-                  </>
+                  <></>
                 ) : (
                   <>
                     <Link to="/login">
@@ -230,67 +242,69 @@ function Navbar(props) {
               </Box>
 
               {/* user avatar */}
-
-              <Box sx={{ flexGrow: 0, ml: "1rem" }}>
-                <Tooltip title="Open settings">
-                  <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                    <Avatar alt="User Image" src={user?.photoURL} />
-                  </IconButton>
-                </Tooltip>
-                <Menu
-                  sx={{ mt: "45px" }}
-                  id="menu-appbar"
-                  anchorEl={anchorElUser}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "right",
-                  }}
-                  open={Boolean(anchorElUser)}
-                  onClose={handleCloseUserMenu}
-                >
-                  <MenuItem
-                    sx={{ textAlign: "center" }}
-                    onClick={handleCloseUserMenu}
+              {user && (
+                <Box sx={{ flexGrow: 0, ml: "1rem" }}>
+                  <Tooltip title="Open settings">
+                    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                      <Avatar alt="User Image" src={user?.photoURL} />
+                    </IconButton>
+                  </Tooltip>
+                  <Menu
+                    sx={{ mt: "45px" }}
+                    id="menu-appbar"
+                    anchorEl={anchorElUser}
+                    anchorOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                      vertical: "top",
+                      horizontal: "right",
+                    }}
+                    open={Boolean(anchorElUser)}
+                    onClose={handleCloseUserMenu}
                   >
-                    <div className="mx-auto space-y-4">
-                      <Typography
-                        sx={{ mx: "auto" }}
-                        variant="h5"
-                        align="center"
-                      >
-                        {user?.displayName}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          mx: "auto",
-                          border: "2px solid",
-                          borderRadius: "20px",
-                          p: ".4rem",
-                        }}
-                        variant="subtitle2"
-                        align="center"
-                      >
-                        {user?.email}
-                      </Typography>
-                    </div>
-                  </MenuItem>
-
-                  <MenuItem onClick={handleCloseUserMenu}>
-                    <Button
-                      endIcon={<LogoutIcon></LogoutIcon>}
-                      variant="contained"
-                      color="error"
+                    <MenuItem
+                      sx={{ textAlign: "center" }}
+                      onClick={handleCloseUserMenu}
                     >
-                      Logout
-                    </Button>
-                  </MenuItem>
-                </Menu>
-              </Box>
+                      <div className="mx-auto space-y-4">
+                        <Typography
+                          sx={{ mx: "auto" }}
+                          variant="h5"
+                          align="center"
+                        >
+                          {user?.displayName}
+                        </Typography>
+                        <Typography
+                          sx={{
+                            mx: "auto",
+                            border: "2px solid",
+                            borderRadius: "20px",
+                            p: ".4rem",
+                          }}
+                          variant="subtitle2"
+                          align="center"
+                        >
+                          {user?.email}
+                        </Typography>
+                      </div>
+                    </MenuItem>
+
+                    <MenuItem onClick={handleCloseUserMenu}>
+                      <Button
+                        onClick={handleLogOut}
+                        endIcon={<LogoutIcon></LogoutIcon>}
+                        variant="contained"
+                        color="error"
+                      >
+                        Logout
+                      </Button>
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              )}
             </Toolbar>
           </Container>
         </ThemeProvider>

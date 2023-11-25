@@ -1,15 +1,39 @@
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const { userSignIn } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data)
-  }
+    console.log(data);
+
+    // signing in the user
+    userSignIn(data.email, data.password).then((result) => {
+      toast.success("Logged in Successfully");
+
+      // adding user into database
+      const userInfo = {
+        userName: result.user.displayName,
+        email: data.email,
+        userId: result.user.uid,
+        role: "user",
+      };
+
+      axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
+        console.log(res.data);
+        navigate("/");
+      });
+    });
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
