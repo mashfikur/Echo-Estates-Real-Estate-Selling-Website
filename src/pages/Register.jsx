@@ -12,7 +12,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Register = () => {
   const [showPass, setShowPass, setLoading] = useState(false);
-  const { user, setUser, createUser } = useAuth();
+  const { user, setUser, createUser, googleUserAuth } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const {
@@ -59,6 +59,29 @@ const Register = () => {
       .catch((err) => {
         toast.error(err.code);
         setLoading(false);
+      });
+  };
+
+  // google sign up
+  const handleGoogleSignIn = () => {
+    googleUserAuth()
+      .then((result) => {
+        toast.success("Logged in Successfully");
+
+        // adding user info to database
+        const userInfo = {
+          userName: result.user.displayName,
+          email: result.user.email,
+          userId: result.user.uid,
+          role: "user",
+        };
+        axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
+          console.log(res.data);
+          navigate("/");
+        });
+      })
+      .catch((err) => {
+        toast.error(err.code);
       });
   };
 
@@ -164,7 +187,10 @@ const Register = () => {
               <div className="divider -mt-4 md:px-40 mb-4">OR</div>
 
               <div className="flex flex-col  mb-4 items-center justify-center ">
-                <button className="btn shadow-lg border-none rounded-full btn-wide text-main font-semibold">
+                <button
+                  onClick={handleGoogleSignIn}
+                  className="btn shadow-lg border-none rounded-full btn-wide text-main font-semibold"
+                >
                   <FcGoogle className="text-xl"></FcGoogle> Sign Up With Google
                 </button>
 

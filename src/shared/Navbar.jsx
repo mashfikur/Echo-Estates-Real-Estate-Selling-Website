@@ -272,7 +272,7 @@ function Navbar(props) {
                       <div className="mx-auto space-y-4">
                         <Typography
                           sx={{ mx: "auto" }}
-                          variant="h5"
+                          variant="h6"
                           align="center"
                         >
                           {user?.displayName}
@@ -294,6 +294,7 @@ function Navbar(props) {
 
                     <MenuItem onClick={handleCloseUserMenu}>
                       <Button
+                        sx={{ mx: "auto", borderRadius: "20px" }}
                         onClick={handleLogOut}
                         endIcon={<LogoutIcon></LogoutIcon>}
                         variant="contained"
