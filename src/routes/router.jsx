@@ -5,6 +5,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Dashboard from "../pages/Dashboard";
+import MyProfile from "../pages/User/MyProfile";
+import Wishlist from "../pages/User/Wishlist";
+import DefaultDashboard from "../pages/DefaultDashboard";
 
 const router = createBrowserRouter([
   {
@@ -30,7 +33,20 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Dashboard></Dashboard>,
     errorElement: <ErrorPage></ErrorPage>,
-    children: [],
+    children: [
+      {
+        path: "/dashboard",
+        element: <DefaultDashboard></DefaultDashboard>,
+      },
+      {
+        path: "/dashboard/my-profile",
+        element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/dashboard/wishlist",
+        element: <Wishlist></Wishlist>,
+      },
+    ],
   },
 ]);
 

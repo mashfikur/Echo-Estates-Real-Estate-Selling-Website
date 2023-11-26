@@ -15,8 +15,11 @@ const Dashboard = () => {
       </div>
 
       {/* smaller devices */}
-      <div className="md:hidden py-2 px-3 bg-main">
-        <ResponsiveBar></ResponsiveBar>
+      <div className="md:hidden">
+        <div className="py-2 px-3 bg-main">
+          <ResponsiveBar></ResponsiveBar>
+        </div>
+
         <Outlet></Outlet>
       </div>
     </div>
