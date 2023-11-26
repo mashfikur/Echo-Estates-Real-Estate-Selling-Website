@@ -4,12 +4,12 @@ import ResponsiveBar from "../shared/ResponsiveBar";
 
 const Dashboard = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       <div className=" hidden md:grid-cols-12   md:grid ">
         <div className=" md:col-span-3 xl:col-span-2">
           <Sidebar></Sidebar>
         </div>
-        <div className=" md:col-span-9 xl:col-span-10">
+        <div className=" md:col-span-9 xl:col-span-10 h-screen overflow-auto">
           <Outlet></Outlet>
         </div>
       </div>
