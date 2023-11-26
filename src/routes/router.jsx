@@ -10,6 +10,7 @@ import Wishlist from "../pages/User/Wishlist";
 import DefaultDashboard from "../pages/DefaultDashboard";
 import PrivateRoute from "./PrivateRoute";
 import AddProperty from "../pages/Agent/AddProperty";
+import MyAddedProperties from "../pages/Agent/MyAddedProperties";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AddProperty></AddProperty>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/added-properties",
+        element: (
+          <PrivateRoute>
+            <MyAddedProperties></MyAddedProperties>
           </PrivateRoute>
         ),
       },
