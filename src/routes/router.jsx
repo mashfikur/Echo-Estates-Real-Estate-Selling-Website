@@ -11,6 +11,7 @@ import DefaultDashboard from "../pages/DefaultDashboard";
 import PrivateRoute from "./PrivateRoute";
 import AddProperty from "../pages/Agent/AddProperty";
 import MyAddedProperties from "../pages/Agent/MyAddedProperties";
+import AllProperties from "../pages/AllProperties";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/all-properties",
+        element: <AllProperties></AllProperties>,
       },
       {
         path: "/login",

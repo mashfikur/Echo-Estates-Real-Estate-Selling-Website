@@ -8,9 +8,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import Links from "../components/Navbar/Links";
 
 export default function ResponsiveBar() {
   const { userSignOut } = useAuth();
+
   const handleSignOut = () => {
     userSignOut().then(() => {
       toast.success("Logged Out Successfully");
@@ -36,18 +38,19 @@ export default function ResponsiveBar() {
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+        backgroundColor: "#323377",
+        minHeight: "100vh",
+        color: "white",
+        fontWeight: "600",
+      }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <div className="mt-10 mb-4 px-10 ">
-        <List className="flex flex-col space-y-5  ">
-          <NavLink to="/dashboard/my-profile">My Profile</NavLink>
-          <NavLink to="/dashboard/wishlist">Wishlist</NavLink>
-          <NavLink>Property Bought</NavLink>
-          <NavLink>My Reviews</NavLink>
-        </List>
+        <Links></Links>
       </div>
       <Divider />
       <div className=" px-10 ">

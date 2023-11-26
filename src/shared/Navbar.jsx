@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import { ThemeProvider } from "@emotion/react";
 import mainLogo from "../assets/images/main-logo.png";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import LoginIcon from "@mui/icons-material/Login";
 import useAuth from "../hooks/useAuth";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -36,6 +36,7 @@ function Navbar(props) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -159,9 +160,10 @@ function Navbar(props) {
               {/* website logo */}
 
               <Typography
+                onClick={() => navigate("/")}
                 variant="h6"
                 component="div"
-                className="text-black"
+                className="text-black cursor-pointer"
                 sx={{
                   flexGrow: 1,
                   display: { xs: "none", sm: "flex" },
@@ -191,10 +193,14 @@ function Navbar(props) {
                 }}
               >
                 <NavLink to="/">
-                  <Button sx={{ color: "#000" }}>Home</Button>
+                  <Button size="sm" sx={{ color: "#000" }}>
+                    Home
+                  </Button>
                 </NavLink>
                 <NavLink to="/all-properties">
-                  <Button sx={{ color: "#000" }}>All Properties</Button>
+                  <Button size="sm" sx={{ color: "#000" }}>
+                    All Properties
+                  </Button>
                 </NavLink>
                 <NavLink to="/dashboard">
                   <Button sx={{ color: "#000" }}>Dashboard</Button>

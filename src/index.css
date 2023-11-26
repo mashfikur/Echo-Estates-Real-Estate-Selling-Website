@@ -36,22 +36,21 @@ body {
 }
 
 .active button {
-  color: white !important;
   font-weight: 700;
-  background-color: green;
-  border-radius: 20px;
   padding: 0.5rem 1.5rem;
-}
-
-.active button:hover {
-  color: white !important;
-  font-weight: 700;
-  background-color: green;
-  border-radius: 20px;
-  padding: 0.5rem 1.5rem;
+  transition: 300ms ease-out;
+  border-bottom: 4px solid green;
 }
 
 .sideLink {
+  color: white;
+  background-color: #8b9bc1;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: 300ms ease-out;
+}
+
+.miniLink {
   color: white;
   background-color: #8b9bc1;
   padding: 0.5rem 1rem;

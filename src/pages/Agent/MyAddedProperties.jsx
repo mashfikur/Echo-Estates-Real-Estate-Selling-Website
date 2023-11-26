@@ -3,6 +3,7 @@ import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
+import { ThreeCircles } from "react-loader-spinner";
 
 const MyAddedProperties = () => {
   const { user } = useAuth();
@@ -29,14 +30,31 @@ const MyAddedProperties = () => {
         easily
       </h3>
 
-      <div className=" max-w-6xl mt-12 mx-auto">
-        <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
-          {data &&
-            data.map((info, idx) => (
-              <PropertyCard info={info} key={idx}></PropertyCard>
-            ))}
+      {isPending ? (
+        <div className="mt-32 flex items-center justify-center ">
+          <ThreeCircles
+            height="100"
+            width="100"
+            color="#A9BEDA"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            ariaLabel="three-circles-rotating"
+            outerCircleColor=""
+            innerCircleColor=""
+            middleCircleColor=""
+          />
         </div>
-      </div>
+      ) : (
+        <div className=" max-w-6xl mt-12 mx-auto">
+          <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
+            {data &&
+              data.map((info, idx) => (
+                <PropertyCard info={info} key={idx}></PropertyCard>
+              ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
