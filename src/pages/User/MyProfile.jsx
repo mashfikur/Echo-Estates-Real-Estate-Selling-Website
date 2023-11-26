@@ -1,7 +1,63 @@
+import { CirclesWithBar } from "react-loader-spinner";
+import SectionHeading from "../../components/Dashboard/SectionHeading";
+import useAuth from "../../hooks/useAuth";
+
 const MyProfile = () => {
+  const { user, loading } = useAuth();
+
+  const month = Date(user?.metadata?.lastLoginAt).split(" ")[1];
+  const date = Date(user?.metadata?.lastLoginAt).split(" ")[2];
+  const year = Date(user?.metadata?.lastLoginAt).split(" ")[3];
+
   return (
-    <div>
-      <h3>Welcome to my profile</h3>
+    <div className="my-20">
+      <SectionHeading title={"My Profile"}></SectionHeading>
+
+      {loading ? (
+        <div className="flex items-center justify-center mt-14">
+          <CirclesWithBar
+            height="100"
+            width="100"
+            color="#323377"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+            outerCircleColor=""
+            innerCircleColor=""
+            barColor=""
+            ariaLabel="circles-with-bar-loading"
+          />
+        </div>
+      ) : (
+        <div className="max-w-5xl mx-auto h-full mt-12 lg:px-10 xl:px-0">
+          <div className="flex items-center gap-8 flex-col-reverse lg:flex-row">
+            <div className="flex-1 space-y-8 scale-90 lg:scale-100">
+              <div>
+                <span className="text-gray-400 font-bold">user name :</span>
+                <h3 className="font-bold text-2xl"> {user?.displayName} </h3>
+              </div>
+              <div>
+                <span className="text-gray-400 font-bold">email :</span>
+                <h3 className="font-bold text-2xl"> {user?.email} </h3>
+              </div>
+              <div>
+                <span className="text-gray-400 font-bold">last login :</span>
+                <h3 className="font-bold text-2xl">
+                  {" "}
+                  {`${month} ${date} , ${year}`}{" "}
+                </h3>
+              </div>
+            </div>
+            <div className="flex-1">
+              <img
+                className="mx-auto lg:w-[50%] rounded-full"
+                src={user?.photoURL}
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

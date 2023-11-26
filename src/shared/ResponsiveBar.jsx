@@ -35,7 +35,7 @@ export default function ResponsiveBar() {
     >
       <div className="mt-10 mb-4 px-10 ">
         <List className="flex flex-col space-y-5  ">
-          <NavLink to="/dashboard">My Profile</NavLink>
+          <NavLink to="/dashboard/my-profile">My Profile</NavLink>
           <NavLink to="/dashboard/wishlist">Wishlist</NavLink>
           <NavLink>Property Bought</NavLink>
           <NavLink>My Reviews</NavLink>
