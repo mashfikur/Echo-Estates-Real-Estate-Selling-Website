@@ -16,7 +16,7 @@ const Sidebar = () => {
 
   return (
     <div className="bg-[#323377] text-white text-lg min-h-screen">
-      <div className="flex flex-col px-8 py-12 space-y-6 font-semibold">
+      <div className="flex flex-col text-sm lg:text-base px-8 py-12 space-y-6 font-semibold">
         <NavLink to="/dashboard">
           <h3 className="text-3xl font-playfair underline">Dashboard</h3>
         </NavLink>
