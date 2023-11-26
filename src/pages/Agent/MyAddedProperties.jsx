@@ -2,13 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
 
 const MyAddedProperties = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data,isPending } = useQuery({
-    queryKey: ["added-properties"],
+  const { data, isPending } = useQuery({
+    queryKey: ["added-properties", user?.email],
     queryFn: async () => {
       if (user) {
         const res = await axiosSecure.get(
@@ -28,8 +29,13 @@ const MyAddedProperties = () => {
         easily
       </h3>
 
-      <div className="max-w-6xl mt-12 mx-auto">
-        <div>hello : {data?.length} </div>
+      <div className=" max-w-6xl mt-12 mx-auto">
+        <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
+          {data &&
+            data.map((info, idx) => (
+              <PropertyCard info={info} key={idx}></PropertyCard>
+            ))}
+        </div>
       </div>
     </div>
   );

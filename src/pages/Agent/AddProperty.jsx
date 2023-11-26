@@ -52,7 +52,7 @@ const AddProperty = () => {
             agent_email: data.email,
             agent_id: user.uid,
             price_range: value,
-            verfication_status: "pending",
+            verification_status: "pending",
             isfraud: true,
           };
 
