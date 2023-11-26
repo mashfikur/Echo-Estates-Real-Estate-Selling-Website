@@ -6,8 +6,16 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import MenuIcon from "@mui/icons-material/Menu";
 import { NavLink } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 export default function ResponsiveBar() {
+  const { userSignOut } = useAuth();
+  const handleSignOut = () => {
+    userSignOut().then(() => {
+      toast.success("Logged Out Successfully");
+    });
+  };
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -48,7 +56,12 @@ export default function ResponsiveBar() {
             Home
           </NavLink>
           <NavLink to="/all-properties">All Properties</NavLink>
-          <NavLink to="/dashboard">Logout</NavLink>
+          <button
+            onClick={handleSignOut}
+            className="btn rounded-full bg-red-500 border-none text-white font-semibold"
+          >
+            Logout
+          </button>
         </List>
       </div>
     </Box>

@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
@@ -12,6 +12,9 @@ const Login = () => {
   const { userSignIn, googleUserAuth } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     console.log(data);
@@ -30,7 +33,7 @@ const Login = () => {
 
       axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
         console.log(res.data);
-        navigate("/");
+        navigate(from, { replace: true });
       });
     });
   };
@@ -49,7 +52,7 @@ const Login = () => {
         };
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);
-          navigate("/");
+          navigate(from, { replace: true });
         });
       })
       .catch((err) => {

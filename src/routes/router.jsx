@@ -8,6 +8,7 @@ import Dashboard from "../pages/Dashboard";
 import MyProfile from "../pages/User/MyProfile";
 import Wishlist from "../pages/User/Wishlist";
 import DefaultDashboard from "../pages/DefaultDashboard";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -31,20 +32,36 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/dashboard",
-        element: <DefaultDashboard></DefaultDashboard>,
+        element: (
+          <PrivateRoute>
+            <DefaultDashboard></DefaultDashboard>,
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/my-profile",
-        element: <MyProfile></MyProfile>,
+        element: (
+          <PrivateRoute>
+            <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard/wishlist",
-        element: <Wishlist></Wishlist>,
+        element: (
+          <PrivateRoute>
+            <Wishlist></Wishlist>
+          </PrivateRoute>
+        ),
       },
     ],
   },
