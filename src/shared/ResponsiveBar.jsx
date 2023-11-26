@@ -9,6 +9,8 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import Links from "../components/Navbar/Links";
+import HomeIcon from "@mui/icons-material/Home";
+import ClearAllIcon from "@mui/icons-material/ClearAll";
 
 export default function ResponsiveBar() {
   const { userSignOut } = useAuth();
@@ -53,12 +55,20 @@ export default function ResponsiveBar() {
         <Links></Links>
       </div>
       <Divider />
-      <div className=" px-10 ">
+      <div className=" px-10 pt-5 ">
         <List className="flex flex-col   space-y-5  ">
-          <NavLink to="/" className={"mt-5"}>
-            Home
+          <NavLink to="/">
+            {" "}
+            <span className="flex items-center gap-2">
+              <HomeIcon></HomeIcon> Home
+            </span>
           </NavLink>
-          <NavLink to="/all-properties">All Properties</NavLink>
+          <NavLink to="/all-properties">
+            {" "}
+            <span className="flex items-center gap-2">
+              <ClearAllIcon></ClearAllIcon> All Properties
+            </span>
+          </NavLink>
           <button
             onClick={handleSignOut}
             className="btn rounded-full bg-red-500 border-none text-white font-semibold"

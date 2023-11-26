@@ -87,6 +87,7 @@ const Register = () => {
       })
       .catch((err) => {
         toast.error(err.code);
+        setLoading(false);
       });
   };
 

@@ -60,8 +60,7 @@ const MyProfile = () => {
                 <></>
               ) : isAgentData.isAgent ? (
                 <div>
-                  <span className="text-gray-400 font-bold">role :</span>
-                  <h3 className="font-bold text-2xl">
+                  <h3 className="font-semibold bg-black text-white px-5 py-1 rounded-lg text-md">
                     {isAgentData.isAgent && "Agent"}
                   </h3>
                 </div>

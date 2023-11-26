@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import Links from "../components/Navbar/Links";
+import HomeIcon from "@mui/icons-material/Home";
+import ClearAllIcon from "@mui/icons-material/ClearAll";
 
 const Sidebar = () => {
   const { userSignOut } = useAuth();
@@ -22,8 +24,18 @@ const Sidebar = () => {
         <Links></Links>
         <hr />
         {/* common links */}
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/all-properties">All Properties</NavLink>
+        <NavLink to="/">
+          {" "}
+          <span className="flex items-center gap-2">
+            <HomeIcon></HomeIcon> Home
+          </span>
+        </NavLink>
+        <NavLink to="/all-properties">
+          {" "}
+          <span className="flex items-center gap-2">
+            <ClearAllIcon></ClearAllIcon> All Properties
+          </span>
+        </NavLink>
         <button
           onClick={handleSignOut}
           className="btn rounded-full bg-red-500 border-none text-white font-semibold"

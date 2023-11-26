@@ -9,7 +9,7 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const { userSignIn, googleUserAuth } = useAuth();
+  const { userSignIn, googleUserAuth, setLoading } = useAuth();
   const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,22 +20,27 @@ const Login = () => {
     console.log(data);
 
     // signing in the user
-    userSignIn(data.email, data.password).then((result) => {
-      toast.success("Logged in Successfully");
+    userSignIn(data.email, data.password)
+      .then((result) => {
+        toast.success("Logged in Successfully");
 
-      // adding user into database
-      const userInfo = {
-        userName: result.user.displayName,
-        email: data.email,
-        userId: result.user.uid,
-        role: "user",
-      };
+        // adding user into database
+        const userInfo = {
+          userName: result.user.displayName,
+          email: data.email,
+          userId: result.user.uid,
+          role: "user",
+        };
 
-      axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
-        console.log(res.data);
-        navigate(from, { replace: true });
+        axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
+          console.log(res.data);
+          navigate(from, { replace: true });
+        });
+      })
+      .catch((err) => {
+        toast.error(err.code);
+        setLoading(false);
       });
-    });
   };
 
   const handleGoogleSignIn = () => {
@@ -57,6 +62,7 @@ const Login = () => {
       })
       .catch((err) => {
         toast.error(err.code);
+        setLoading(false);
       });
   };
 

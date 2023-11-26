@@ -81,10 +81,18 @@ function Navbar(props) {
         className="space-y-6 "
         sx={{ display: "flex", flexDirection: "column" }}
       >
-        <NavLink to="/" className={"mt-5"}>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "miniLink" : "")}
+        >
           Home
         </NavLink>
-        <NavLink to="/all-properties">All Properties</NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "miniLink" : "")}
+          to="/all-properties"
+        >
+          All Properties
+        </NavLink>
         <NavLink to="/dashboard">Dashboard</NavLink>
         {user ? (
           <>

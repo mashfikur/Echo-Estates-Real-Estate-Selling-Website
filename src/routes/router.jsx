@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddProperty from "../pages/Agent/AddProperty";
 import MyAddedProperties from "../pages/Agent/MyAddedProperties";
 import AllProperties from "../pages/AllProperties";
+import AgentRoute from "./AgentRoute";
 
 const router = createBrowserRouter([
   {
@@ -65,25 +66,25 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/wishlist",
         element: (
-          <PrivateRoute>
+          <AgentRoute>
             <Wishlist></Wishlist>
-          </PrivateRoute>
+          </AgentRoute>
         ),
       },
       {
         path: "/dashboard/add-property",
         element: (
-          <PrivateRoute>
+          <AgentRoute>
             <AddProperty></AddProperty>
-          </PrivateRoute>
+          </AgentRoute>
         ),
       },
       {
         path: "/dashboard/added-properties",
         element: (
-          <PrivateRoute>
+          <AgentRoute>
             <MyAddedProperties></MyAddedProperties>
-          </PrivateRoute>
+          </AgentRoute>
         ),
       },
     ],
