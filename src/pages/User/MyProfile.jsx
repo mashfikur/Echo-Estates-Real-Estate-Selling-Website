@@ -1,9 +1,11 @@
 import { CirclesWithBar } from "react-loader-spinner";
 import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAuth from "../../hooks/useAuth";
+import useCheckAgent from "../../hooks/useCheckAgent";
 
 const MyProfile = () => {
   const { user, loading } = useAuth();
+  const [isAgentData, isAgentLoading] = useCheckAgent();
 
   const month = Date(user?.metadata?.lastLoginAt).split(" ")[1];
   const date = Date(user?.metadata?.lastLoginAt).split(" ")[2];
@@ -48,12 +50,24 @@ const MyProfile = () => {
                 </h3>
               </div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 flex flex-col items-center gap-5">
               <img
                 className="mx-auto lg:w-[50%] rounded-full"
                 src={user?.photoURL}
-                alt=""
+                alt="user-profile"
               />
+              {isAgentLoading ? (
+                <></>
+              ) : isAgentData.isAgent ? (
+                <div>
+                  <span className="text-gray-400 font-bold">role :</span>
+                  <h3 className="font-bold text-2xl">
+                    {isAgentData.isAgent && "Agent"}
+                  </h3>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

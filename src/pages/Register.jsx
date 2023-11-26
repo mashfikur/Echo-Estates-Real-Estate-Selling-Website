@@ -35,7 +35,12 @@ const Register = () => {
           photoURL: data.photo,
         })
           .then(() => {
-            setUser({ ...user, displayName: data.name, photoURL: data.photo });
+            setUser({
+              ...user,
+              displayName: data.name,
+              photoURL: data.photo,
+              email: data?.email,
+            });
             reset();
 
             // adding user into database

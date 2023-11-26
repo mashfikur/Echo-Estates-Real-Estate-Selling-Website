@@ -244,7 +244,7 @@ function Navbar(props) {
 
               {user && (
                 <Box sx={{ flexGrow: 0, ml: "1rem" }}>
-                  <Tooltip title="Open settings">
+                  <Tooltip title="Profile">
                     <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                       <Avatar alt="User Image" src={user?.photoURL} />
                     </IconButton>
