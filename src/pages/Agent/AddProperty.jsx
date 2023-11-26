@@ -3,14 +3,22 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import useAuth from "../../hooks/useAuth";
+import { useForm } from "react-hook-form";
 
 const AddProperty = () => {
   const { user } = useAuth();
-  const [value, setValue] = React.useState([20, 37]);
+  const [value, setValue] = React.useState([10, 30]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
-    console.log(newValue);
   };
+
+  // handling form
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log({ ...data, price: value });
+  };
+
   return (
     <div>
       <SectionHeading title={"Add Property"}></SectionHeading>
@@ -25,7 +33,10 @@ const AddProperty = () => {
           <div className=" lg:mt-14 xl:mt-20">
             <div className="flex flex-col p-3">
               <div className="card w-full  shadow-lg border-main border-2 bg-base-100">
-                <form className="card-body space-y-2">
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="card-body space-y-2"
+                >
                   {/* first row */}
                   <div className="flex flex-col lg:flex-row items-center gap-5">
                     <div className="form-control flex-1">
@@ -37,6 +48,7 @@ const AddProperty = () => {
                         placeholder="Title"
                         className="input focus:outline-none input-bordered"
                         required
+                        {...register("title")}
                       />
                     </div>
                     <div className="form-control  flex-1">
@@ -48,25 +60,29 @@ const AddProperty = () => {
                         placeholder="Location"
                         className="input focus:outline-none input-bordered"
                         required
+                        {...register("location")}
                       />
                     </div>
                   </div>
 
                   {/* second row */}
-                  <div className="flex gap-5  flex-col lg:flex-row items-center">
-                    <div className="flex flex-1 flex-col  ">
+                  <div className="flex gap-5   flex-col lg:flex-row items-center">
+                    <div className="flex flex-1 scale-90 lg:scale-100 flex-col  ">
                       <div>
                         <h3 className=" text-sm mb-1">Property Image </h3>
                       </div>
                       <div>
                         <input
                           type="file"
-                          className="file-input file-focus:outline-none input-bordered w-full rounded-lg"
+                          className="file-input  file-focus:outline-none input-bordered w-full rounded-lg"
+                          {...register("image")}
                         />
                       </div>
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-sm mb-3">Price Range ( $k ) </h3>
+                      <h3 className="text-sm mb-3">
+                        Price Range ( {value[0]}$k-{value[1]}$k ){" "}
+                      </h3>
                       <Box sx={{ width: "100%" }}>
                         <Slider
                           getAriaLabel={() => "Temperature range"}
@@ -90,6 +106,8 @@ const AddProperty = () => {
                         placeholder="Agent Name"
                         className="input focus:outline-none input-bordered"
                         required
+                        readOnly
+                        {...register("name")}
                       />
                     </div>
                     <div className="form-control flex-1">
@@ -102,6 +120,8 @@ const AddProperty = () => {
                         placeholder="Agent Email"
                         className="input focus:outline-none input-bordered"
                         required
+                        readOnly
+                        {...register("email")}
                       />
                     </div>
                   </div>
