@@ -2,12 +2,14 @@ import { List } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import useCheckAgent from "../../hooks/useCheckAgent";
 import { Bars } from "react-loader-spinner";
+import useCheckAdmin from "../../hooks/useCheckAdmin";
 
 const Links = () => {
   const [isAgentData, isAgentLoading] = useCheckAgent();
+  const [isAdmin, isAdminLoading] = useCheckAdmin();
   return (
     <div>
-      {isAgentLoading ? (
+      {isAgentLoading || isAdminLoading ? (
         <Bars
           height="80"
           width="80"
@@ -18,6 +20,7 @@ const Links = () => {
           visible={true}
         />
       ) : isAgentData?.isAgent ? (
+        // agent links
         <List className="flex flex-col space-y-5  ">
           <NavLink
             className={({ isActive }) => (isActive ? "miniLink" : "")}
@@ -50,7 +53,36 @@ const Links = () => {
             Requested properties
           </NavLink>
         </List>
+      ) : isAdmin ? (
+        // admin links
+        <List className="flex flex-col space-y-5  ">
+          <NavLink
+            className={({ isActive }) => (isActive ? "miniLink" : "")}
+            to="/dashboard/my-profile"
+          >
+            Admin Profile
+          </NavLink>
+          <NavLink
+            className={({ isActive }) => (isActive ? "miniLink" : "")}
+            to="/dashboard/manage-properties"
+          >
+            Manage Properties
+          </NavLink>
+          <NavLink
+            to="/dashboard/manage-users"
+            className={({ isActive }) => (isActive ? "miniLink" : "")}
+          >
+            Manage Users
+          </NavLink>
+          <NavLink
+            to="/dashboard/manage-reviews"
+            className={({ isActive }) => (isActive ? "miniLink" : "")}
+          >
+            Manage Reviews
+          </NavLink>
+        </List>
       ) : (
+        // user links
         <List className="flex flex-col space-y-5  ">
           <NavLink
             className={({ isActive }) => (isActive ? "miniLink" : "")}
