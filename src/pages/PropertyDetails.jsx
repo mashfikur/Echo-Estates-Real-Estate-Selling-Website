@@ -1,5 +1,5 @@
 import { Button, Container } from "@mui/material";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -7,9 +7,13 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import EmailIcon from "@mui/icons-material/Email";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import useAuth from "../hooks/useAuth";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const PropertyDetails = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data } = useQuery({
@@ -20,6 +24,36 @@ const PropertyDetails = () => {
       return res.data;
     },
   });
+
+  // using mutation
+  const mutation = useMutation({
+    mutationFn: (info) => {
+      return axiosSecure.post("/api/v1/user/add-to-wishlist", info);
+    },
+  });
+
+  // Add Button Event handler
+  const handleAddToWishList = () => {
+    const info = {
+      property_id: id,
+      wishlisted_by: user.uid,
+    };
+
+    // mutating the data
+    mutation.mutate(info);
+  };
+
+  useEffect(() => {
+    if (mutation.isError) {
+      toast.error(mutation.error.message);
+      mutation.reset();
+    }
+
+    if (mutation.isSuccess) {
+      toast.success("Added to your wishlist");
+      mutation.reset();
+    }
+  }, [mutation]);
 
   return (
     <div className="  lg:mt-20 details-banner">
@@ -67,6 +101,7 @@ const PropertyDetails = () => {
               </div>
               <div className=" mt-10 lg:mt-14 mx-auto ">
                 <Button
+                  onClick={handleAddToWishList}
                   sx={{
                     padding: ".7rem 1rem",
                     width: { xs: "100%", sm: "inherit" },
@@ -75,7 +110,7 @@ const PropertyDetails = () => {
                   variant="contained"
                   color="warning"
                 >
-                  Add to Wishlist
+                  {mutation.isPending ? "Adding..." : "Add to Wishlist"}
                 </Button>
               </div>
             </div>
@@ -86,6 +121,14 @@ const PropertyDetails = () => {
                 alt=""
               />
             </div>
+          </div>
+
+          {/* users review */}
+          <div className="py-32 min-h-screen">
+            <h3 className="text-white font-semibold underline text-4xl text-center">
+              Property Reviews
+            </h3>
+            <div className="py-40">reviw cards</div>
           </div>
         </Container>
       </div>
