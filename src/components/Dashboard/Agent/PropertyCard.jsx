@@ -12,12 +12,13 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import TocIcon from "@mui/icons-material/Toc";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 
 export default function PropertyCard({ info, handleWishListRemove }) {
   const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Card sx={{ maxWidth: 345, mx: "auto" }}>
@@ -96,6 +97,9 @@ export default function PropertyCard({ info, handleWishListRemove }) {
             <>
               {" "}
               <Button
+                onClick={() =>
+                  navigate(`/dashboard/wishlist/make-offer/${info._id}`)
+                }
                 sx={{ borderRadius: "30px" }}
                 variant="contained"
                 color="success"

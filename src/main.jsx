@@ -20,7 +20,22 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <ThemeProvider theme={theme}>
           <HelmetProvider>
             <RouterProvider router={router} />
-            <Toaster></Toaster>
+            <Toaster
+              toastOptions={{
+                success: {
+                  style: {
+                    background: "green",
+                    color: "white",
+                  },
+                },
+                error: {
+                  style: {
+                    background: "red",
+                    color: "white",
+                  },
+                },
+              }}
+            ></Toaster>
           </HelmetProvider>
         </ThemeProvider>
       </AuthProvider>

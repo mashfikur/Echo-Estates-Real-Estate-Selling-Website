@@ -14,6 +14,7 @@ import MyAddedProperties from "../pages/Agent/MyAddedProperties";
 import AllProperties from "../pages/AllProperties";
 import AgentRoute from "./AgentRoute";
 import PropertyDetails from "../pages/PropertyDetails";
+import MakeOffer from "../pages/User/MakeOffer";
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Wishlist></Wishlist>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/wishlist/make-offer/:id",
+        element: (
+          <PrivateRoute>
+            <MakeOffer></MakeOffer>
           </PrivateRoute>
         ),
       },

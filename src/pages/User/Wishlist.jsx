@@ -5,12 +5,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { ThreeCircles } from "react-loader-spinner";
 
 const Wishlist = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data, refetch } = useQuery({
+  const { data, refetch, isPending } = useQuery({
     queryKey: ["wishlist", user?.uid],
     queryFn: async () => {
       if (user) {
@@ -52,17 +53,43 @@ const Wishlist = () => {
         do next.
       </p>
 
-      <div className="max-w-6xl mt-10 mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          {data &&
-            data.map((item) => (
-              <PropertyCard
-                handleWishListRemove={handleWishListRemove}
-                key={item._id}
-                info={item}
-              ></PropertyCard>
-            ))}
-        </div>
+      <div className="max-w-6xl my-10 mx-auto">
+        {isPending ? (
+          <>
+            <div className="mt-32 flex items-center justify-center ">
+              <ThreeCircles
+                height="100"
+                width="100"
+                color="#A9BEDA"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+                ariaLabel="three-circles-rotating"
+                outerCircleColor=""
+                innerCircleColor=""
+                middleCircleColor=""
+              />
+            </div>
+          </>
+        ) : data && data.length ? (
+          <div className="grid grid-cols-1 gap-7 lg:gap-4  lg:grid-cols-2 xl:grid-cols-3">
+            {data &&
+              data.map((item) => (
+                <PropertyCard
+                  handleWishListRemove={handleWishListRemove}
+                  key={item._id}
+                  info={item}
+                ></PropertyCard>
+              ))}
+          </div>
+        ) : (
+          <div className="text-center my-24 lg:my-40">
+            <h3 className=" text-3xl lg:text-5xl font-semibold text-gray-400">
+              {" "}
+              You {"haven't"} added anything to your wishlist{" "}
+            </h3>
+          </div>
+        )}
       </div>
     </div>
   );
