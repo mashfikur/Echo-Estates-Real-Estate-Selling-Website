@@ -14,8 +14,9 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link, useLocation } from "react-router-dom";
 import TocIcon from "@mui/icons-material/Toc";
+import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 
-export default function PropertyCard({ info }) {
+export default function PropertyCard({ info, handleWishListRemove }) {
   const location = useLocation();
 
   return (
@@ -91,6 +92,27 @@ export default function PropertyCard({ info }) {
                 </Button>
               </Link>
             </>
+          ) : location.pathname === "/dashboard/wishlist" ? (
+            <>
+              {" "}
+              <Button
+                sx={{ borderRadius: "30px" }}
+                variant="contained"
+                color="success"
+                endIcon={<RequestQuoteIcon></RequestQuoteIcon>}
+              >
+                Make An Offer
+              </Button>
+              <Button
+                onClick={() => handleWishListRemove(info._id)}
+                sx={{ borderRadius: "30px" }}
+                variant="contained"
+                endIcon={<DeleteIcon></DeleteIcon>}
+                color="error"
+              >
+                Remove
+              </Button>
+            </>
           ) : (
             <>
               <Button
@@ -118,4 +140,5 @@ export default function PropertyCard({ info }) {
 
 PropertyCard.propTypes = {
   info: PropTypes.object,
+  handleWishListRemove: PropTypes.func,
 };
