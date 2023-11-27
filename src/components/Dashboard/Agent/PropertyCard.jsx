@@ -12,7 +12,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import TocIcon from "@mui/icons-material/Toc";
 
 export default function PropertyCard({ info }) {
@@ -74,17 +74,22 @@ export default function PropertyCard({ info }) {
         <div className="flex justify-between  w-full">
           {location.pathname === "/all-properties" ? (
             <>
-              <Button
-                sx={{
-                  borderRadius: "30px",
-                  mx: "auto",
-                  backgroundColor: "black",
-                }}
-                variant="contained"
-                endIcon={<TocIcon></TocIcon>}
+              <Link
+                to={`/all-properties/property/details/${info._id}`}
+                className="mx-auto"
               >
-                Details
-              </Button>
+                <Button
+                  sx={{
+                    borderRadius: "30px",
+                    mx: "auto",
+                    backgroundColor: "black",
+                  }}
+                  variant="contained"
+                  endIcon={<TocIcon></TocIcon>}
+                >
+                  Details
+                </Button>
+              </Link>
             </>
           ) : (
             <>

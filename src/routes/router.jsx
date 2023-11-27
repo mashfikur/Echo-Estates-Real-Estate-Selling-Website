@@ -13,6 +13,7 @@ import AddProperty from "../pages/Agent/AddProperty";
 import MyAddedProperties from "../pages/Agent/MyAddedProperties";
 import AllProperties from "../pages/AllProperties";
 import AgentRoute from "./AgentRoute";
+import PropertyDetails from "../pages/PropertyDetails";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,19 @@ const router = createBrowserRouter([
       },
       {
         path: "/all-properties",
-        element: <AllProperties></AllProperties>,
+        element: (
+          <PrivateRoute>
+            <AllProperties></AllProperties>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/all-properties/property/details/:id",
+        element: (
+          <PrivateRoute>
+            <PropertyDetails></PropertyDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/login",
