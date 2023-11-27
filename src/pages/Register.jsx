@@ -100,11 +100,11 @@ const Register = () => {
       <Helmet>
         <title>Echo Estates | Register</title>
       </Helmet>
-      <div className="pt-20 pb-20 container mx-auto">
+      <div className="pt-14 pb-20 container mx-auto">
         <div className="">
           <div className=" flex p-4 md:p-16 items-center justify-between  flex-col lg:flex-row">
             <div className=" w-full lg:w-[50%]  card mx-auto  shadow-2xl bg-base-100">
-              <div className="text-center -mb-10 lg:mb-0 pt-6 ">
+              <div className="text-center -mb-10 lg:-mb-10 pt-6 ">
                 <h1 className=" text-2xl md:text-5xl font-playfair font-bold">
                   Register Now!
                 </h1>

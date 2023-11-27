@@ -52,7 +52,7 @@ const MyProfile = () => {
             </div>
             <div className="flex-1 flex flex-col items-center gap-5">
               <img
-                className="mx-auto lg:w-[50%] rounded-full"
+                className="mx-auto w-[15rem] h-[15rem] object-cover rounded-full"
                 src={user?.photoURL}
                 alt="user-profile"
               />

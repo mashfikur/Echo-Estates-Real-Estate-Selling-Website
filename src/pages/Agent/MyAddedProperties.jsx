@@ -4,10 +4,13 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
 import { ThreeCircles } from "react-loader-spinner";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const MyAddedProperties = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { data, isPending } = useQuery({
     queryKey: ["added-properties", user?.email],
@@ -47,12 +50,30 @@ const MyAddedProperties = () => {
         </div>
       ) : (
         <div className=" max-w-6xl mt-12 mx-auto">
-          <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
-            {data &&
-              data.map((info, idx) => (
-                <PropertyCard info={info} key={idx}></PropertyCard>
-              ))}
-          </div>
+          {data.length > 0 ? (
+            <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
+              {data &&
+                data.map((info, idx) => (
+                  <PropertyCard info={info} key={idx}></PropertyCard>
+                ))}
+            </div>
+          ) : (
+            <div>
+              <h3 className="my-20 text-center font-semibold text-gray-400 text-4xl">
+                You {"haven't added any property yet"}{" "}
+              </h3>
+              <div className=" flex items-center justify-center">
+                <Button
+                  onClick={() => navigate("/dashboard/add-property")}
+                  variant="contained"
+                  color="secondary"
+                  sx={{ py: ".7rem" }}
+                >
+                  Add Property
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

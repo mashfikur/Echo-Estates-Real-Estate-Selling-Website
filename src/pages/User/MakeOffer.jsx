@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SectionHeading from "../../components/Dashboard/SectionHeading";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
@@ -6,11 +6,14 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { ThreeCircles } from "react-loader-spinner";
 import toast from "react-hot-toast";
+import { IconButton } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const MakeOffer = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { data, isPending } = useQuery({
     queryKey: ["offer-property", id],
@@ -71,6 +74,16 @@ const MakeOffer = () => {
       </p>
 
       <div className="max-w-6xl mx-auto my-10">
+        <div className="mx-auto flex justify-center xl:justify-start">
+          <IconButton
+            sx={{ backgroundColor: "#323377" }}
+            color="primary"
+            size="medium"
+            onClick={() => navigate(-1)}
+          >
+            <ArrowBackIcon color="warning"></ArrowBackIcon>
+          </IconButton>
+        </div>
         {isPending ? (
           <>
             <div className="mt-32 flex items-center justify-center ">
@@ -91,7 +104,7 @@ const MakeOffer = () => {
         ) : (
           data && (
             <div>
-              <div className=" lg:mt-14 xl:mt-20">
+              <div className=" lg:mt-14 xl:mt-7">
                 <div className="flex flex-col p-3">
                   <div className="card w-full  shadow-lg border-main border-2 bg-base-100">
                     <form
@@ -221,7 +234,7 @@ const MakeOffer = () => {
                             <span className="label-text">Buying Date </span>
                           </label>
                           <input
-                          min={getCurrentDate()}
+                            min={getCurrentDate()}
                             type="date"
                             className="input focus:outline-none input-bordered"
                             required

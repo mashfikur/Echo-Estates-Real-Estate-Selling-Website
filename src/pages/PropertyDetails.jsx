@@ -1,6 +1,6 @@
-import { Button, Container } from "@mui/material";
+import { Button, Container, IconButton } from "@mui/material";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PinDropIcon from "@mui/icons-material/PinDrop";
@@ -11,11 +11,13 @@ import useAuth from "../hooks/useAuth";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 const PropertyDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
 
   const { data, isPending } = useQuery({
     queryKey: ["property", id],
@@ -80,6 +82,16 @@ const PropertyDetails = () => {
           ) : (
             <div className="flex pb-10 min-h-screen  flex-col-reverse gap-10 lg:gap-0 lg:flex-row  items-center text-white">
               <div className="flex-1 md:text-center lg:text-left">
+                <div className="mx-auto flex justify-center lg:justify-start">
+                  <IconButton
+                    sx={{ backgroundColor: "white", mb: "2rem" }}
+                    color="primary"
+                    size="medium"
+                    onClick={() => navigate(-1)}
+                  >
+                    <ArrowBackIcon></ArrowBackIcon>
+                  </IconButton>
+                </div>
                 <h3 className="capitalize text-4xl font-bold">
                   {" "}
                   {data?.property_title}{" "}
