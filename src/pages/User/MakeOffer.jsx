@@ -5,6 +5,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import useAuth from "../../hooks/useAuth";
 import { ThreeCircles } from "react-loader-spinner";
+import toast from "react-hot-toast";
 
 const MakeOffer = () => {
   const { id } = useParams();
@@ -22,8 +23,16 @@ const MakeOffer = () => {
 
   // creating form
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (formData) => {
+    const startingRange = data.price_range[0];
+    const endingRange = data.price_range[1];
+    const amount = parseFloat(formData.offered_amount);
+
+    if (!(startingRange <= amount && amount <= endingRange)) {
+      return toast.error("You have offered Invalid amount");
+    }
+
+    console.log(formData);
   };
   return (
     <div>
