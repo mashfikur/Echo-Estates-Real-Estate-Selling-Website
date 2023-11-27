@@ -16,6 +16,7 @@ import AgentRoute from "./AgentRoute";
 import PropertyDetails from "../pages/PropertyDetails";
 import MakeOffer from "../pages/User/MakeOffer";
 import ManageUsers from "../pages/Admin/ManageUsers";
+import ManageProperties from "../pages/Admin/ManageProperties";
 
 const router = createBrowserRouter([
   {
@@ -115,6 +116,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageUsers></ManageUsers>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage-properties",
+        element: (
+          <PrivateRoute>
+            <ManageProperties></ManageProperties>
           </PrivateRoute>
         ),
       },
