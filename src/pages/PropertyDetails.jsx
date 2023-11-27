@@ -22,11 +22,11 @@ const PropertyDetails = () => {
   });
 
   return (
-    <div className="mt-20 details-banner">
+    <div className="  lg:mt-20 details-banner">
       <div className="pt-24">
         <Container maxWidth="xl">
-          <div className="flex items-center text-white ">
-            <div className="flex-1 ">
+          <div className="flex pb-10  flex-col-reverse gap-10 lg:gap-0 lg:flex-row  items-center text-white ">
+            <div className="flex-1 md:text-center lg:text-left">
               <h3 className="capitalize text-4xl font-bold">
                 {" "}
                 {data?.property_title}{" "}
@@ -65,9 +65,12 @@ const PropertyDetails = () => {
                   {data?.agent_email}
                 </h3>
               </div>
-              <div className="mt-14">
+              <div className=" mt-10 lg:mt-14 mx-auto ">
                 <Button
-                  sx={{ padding: ".7rem 1rem" }}
+                  sx={{
+                    padding: ".7rem 1rem",
+                    width: { xs: "100%", sm: "inherit" },
+                  }}
                   startIcon={<FavoriteIcon></FavoriteIcon>}
                   variant="contained"
                   color="warning"
