@@ -12,8 +12,12 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useLocation } from "react-router-dom";
+import TocIcon from "@mui/icons-material/Toc";
 
 export default function PropertyCard({ info }) {
+  const location = useLocation();
+
   return (
     <Card sx={{ maxWidth: 345, mx: "auto" }}>
       <CardHeader
@@ -22,7 +26,8 @@ export default function PropertyCard({ info }) {
             <img src={info?.agent_image} alt="" />
           </Avatar>
         }
-        title={info?.agent_name}
+        title={<h1 className="text-base font-bold">{info?.agent_name}</h1>}
+        subheader={<h3 className="">Property Owner</h3>}
         action={
           <Chip
             sx={{ textAlign: "end", mt: "1rem" }}
@@ -67,21 +72,39 @@ export default function PropertyCard({ info }) {
 
       <CardActions>
         <div className="flex justify-between  w-full">
-          <Button
-            sx={{ borderRadius: "30px" }}
-            variant="contained"
-            endIcon={<BorderColorIcon></BorderColorIcon>}
-          >
-            Update
-          </Button>
-          <Button
-            sx={{ borderRadius: "30px" }}
-            variant="contained"
-            endIcon={<DeleteIcon></DeleteIcon>}
-            color="error"
-          >
-            Delete
-          </Button>
+          {location.pathname === "/all-properties" ? (
+            <>
+              <Button
+                sx={{
+                  borderRadius: "30px",
+                  mx: "auto",
+                  backgroundColor: "black",
+                }}
+                variant="contained"
+                endIcon={<TocIcon></TocIcon>}
+              >
+                Details
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                sx={{ borderRadius: "30px" }}
+                variant="contained"
+                endIcon={<BorderColorIcon></BorderColorIcon>}
+              >
+                Update
+              </Button>
+              <Button
+                sx={{ borderRadius: "30px" }}
+                variant="contained"
+                endIcon={<DeleteIcon></DeleteIcon>}
+                color="error"
+              >
+                Delete
+              </Button>
+            </>
+          )}
         </div>
       </CardActions>
     </Card>

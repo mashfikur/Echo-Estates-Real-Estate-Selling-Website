@@ -66,9 +66,9 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/wishlist",
         element: (
-          <AgentRoute>
+          <PrivateRoute>
             <Wishlist></Wishlist>
-          </AgentRoute>
+          </PrivateRoute>
         ),
       },
       {
