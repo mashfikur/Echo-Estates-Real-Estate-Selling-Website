@@ -21,8 +21,24 @@ const MakeOffer = () => {
     },
   });
 
+  //current date
+  function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1; // Months are zero-indexed
+    let day = today.getDate();
+
+    // Add leading zeros to month and day if needed
+    month = month < 10 ? "0" + month : month;
+    day = day < 10 ? "0" + day : day;
+
+    // Format: YYYY-MM-DD
+    return `${year}-${month}-${day}`;
+  }
+
   // creating form
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (formData) => {
     const startingRange = data.price_range[0];
     const endingRange = data.price_range[1];
@@ -32,7 +48,19 @@ const MakeOffer = () => {
       return toast.error("You have offered Invalid amount");
     }
 
-    console.log(formData);
+    // adding data to database
+    const offered = {
+      agent_id: data.agent_id,
+      property_title: formData.title,
+      property_location: formData.location,
+      buyer_name: formData.buyer_name,
+      buyer_email: formData.buyer_email,
+      buyer_id: user.uid,
+      offered_price: formData.offered_amount,
+      buying_date: formData.buying_date,
+    };
+
+    console.log(offered);
   };
   return (
     <div>
@@ -193,6 +221,7 @@ const MakeOffer = () => {
                             <span className="label-text">Buying Date </span>
                           </label>
                           <input
+                          min={getCurrentDate()}
                             type="date"
                             className="input focus:outline-none input-bordered"
                             required
