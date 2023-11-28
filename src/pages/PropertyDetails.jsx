@@ -163,7 +163,17 @@ const PropertyDetails = () => {
           )}
 
           {/* users review */}
-         <Reviews></Reviews>
+          {isPending ? (
+            <></>
+          ) : (
+            data && (
+              <Reviews
+                agent_name={data?.agent_name}
+                property_title={data?.property_title}
+                property_id={id}
+              ></Reviews>
+            )
+          )}
         </Container>
       </div>
     </div>
