@@ -120,6 +120,9 @@ export default function PropertyCard({ info, handleWishListRemove }) {
           ) : (
             <>
               <Button
+                onClick={() =>
+                  navigate(`/dashboard/update-property/${info._id}`)
+                }
                 sx={{ borderRadius: "30px" }}
                 variant="contained"
                 endIcon={<BorderColorIcon></BorderColorIcon>}

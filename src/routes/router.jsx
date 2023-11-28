@@ -19,6 +19,7 @@ import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageProperties from "../pages/Admin/ManageProperties";
 import AdvertiseProperty from "../pages/Admin/AdvertiseProperty";
 import AdminRoute from "./AdminRoute";
+import UpdateProperty from "../pages/Agent/UpdateProperty";
 
 const router = createBrowserRouter([
   {
@@ -110,6 +111,14 @@ const router = createBrowserRouter([
         element: (
           <AgentRoute>
             <MyAddedProperties></MyAddedProperties>
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/update-property/:id",
+        element: (
+          <AgentRoute>
+            <UpdateProperty></UpdateProperty>
           </AgentRoute>
         ),
       },
