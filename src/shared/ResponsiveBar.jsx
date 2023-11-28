@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import MenuIcon from "@mui/icons-material/Menu";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import Links from "../components/Navbar/Links";
@@ -14,10 +14,11 @@ import ClearAllIcon from "@mui/icons-material/ClearAll";
 
 export default function ResponsiveBar() {
   const { userSignOut } = useAuth();
-
+  const navigate = useNavigate();
   const handleSignOut = () => {
     userSignOut().then(() => {
       toast.success("Logged Out Successfully");
+      navigate("/");
     });
   };
   const [state, setState] = React.useState({

@@ -21,6 +21,7 @@ import AdvertiseProperty from "../pages/Admin/AdvertiseProperty";
 import AdminRoute from "./AdminRoute";
 import UpdateProperty from "../pages/Agent/UpdateProperty";
 import PropertyBought from "../pages/User/PropertyBought";
+import RequestedProperties from "../pages/Agent/RequestedProperties";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +129,14 @@ const router = createBrowserRouter([
         element: (
           <AgentRoute>
             <UpdateProperty></UpdateProperty>
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "/dashboard/requested-properties",
+        element: (
+          <AgentRoute>
+            <RequestedProperties></RequestedProperties>
           </AgentRoute>
         ),
       },

@@ -2,9 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
-import Swal from "sweetalert2";
-import toast from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
 import OfferedCard from "../../components/Dashboard/User/OfferedCard";
 
@@ -12,7 +9,7 @@ const PropertyBought = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data, refetch, isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["offered", user?.uid],
     queryFn: async () => {
       if (user) {
@@ -24,29 +21,6 @@ const PropertyBought = () => {
       }
     },
   });
-
-  const handleWishListRemove = (_id) => {
-    Swal.fire({
-      title: "Do you want to remove this property?",
-      text: "It won't be in your list after that!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Remove it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axiosSecure
-          .delete(`/api/v1/user/remove-wishlist/${_id}`)
-          .then((res) => {
-            if (res.data.deletedCount) {
-              toast.success("Removed from your wishlist");
-              refetch();
-            }
-          });
-      }
-    });
-  };
 
   return (
     <div>

@@ -9,23 +9,15 @@ import { red } from "@mui/material/colors";
 import PropTypes from "prop-types";
 import { Button, Chip } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import TocIcon from "@mui/icons-material/Toc";
+import { useNavigate } from "react-router-dom";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
+import PriceCheckIcon from "@mui/icons-material/PriceCheck";
 
-export default function OfferedCard({
-  info,
-  handleWishListRemove,
-  handlePropertyDelete,
-}) {
-  const location = useLocation();
+export default function OfferedCard({ info }) {
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ width: 345, mx: "auto" }}>
+    <Card sx={{ width: 345, mx: "auto", height: 530 }}>
       <div className="flex flex-col relative">
         {/* card header */}
         <div>
@@ -45,9 +37,11 @@ export default function OfferedCard({
                 color={
                   info?.status === "pending"
                     ? "warning"
-                    : info?.status === "verified"
+                    : info?.status === "accepted"
                     ? "success"
-                    : ""
+                    : info?.status === "bought"
+                    ? "secondary"
+                    : info?.status === "rejected" && "error"
                 }
               ></Chip>
             }
@@ -65,7 +59,7 @@ export default function OfferedCard({
         {/* card content */}
         <div>
           <CardContent>
-            <Typography height={70} variant="h5">
+            <Typography height={65} variant="h5">
               {info?.property_title}
             </Typography>
 
@@ -73,44 +67,43 @@ export default function OfferedCard({
               sx={{ mt: "1rem" }}
               variant="subtitle1"
               color="text.secondary"
+              height={50}
             >
-              <LocationOnIcon></LocationOnIcon> {info?.property_location}
+              <LocationOnIcon></LocationOnIcon>{" "}
+              <span className="font-bold">Location:</span>{" "}
+              {info?.property_location}
             </Typography>
             <Typography
-              sx={{ mt: "1rem" }}
+              sx={{ mt: ".5rem" }}
               variant="subtitle1"
               color="text.secondary"
             >
-              <LocationOnIcon></LocationOnIcon> Offered Amount :{" "}
-              {info?.offered_price}
+              <PriceCheckIcon></PriceCheckIcon>{" "}
+              <span className="font-bold">Offered Amount:</span> $
+              {info?.offered_price}k
             </Typography>
           </CardContent>
         </div>
         {/* card actions */}
-        <div className="">
+        <div className="-mt-4">
           <CardActions>
             <>
-              {" "}
-              <Button
-                onClick={() =>
-                  navigate(`/dashboard/wishlist/make-offer/${info._id}`)
-                }
-                sx={{ borderRadius: "30px" }}
-                variant="contained"
-                color="success"
-                endIcon={<RequestQuoteIcon></RequestQuoteIcon>}
-              >
-                Make An Offer
-              </Button>
-              <Button
-                onClick={() => handleWishListRemove(info._id)}
-                sx={{ borderRadius: "30px" }}
-                variant="contained"
-                endIcon={<DeleteIcon></DeleteIcon>}
-                color="error"
-              >
-                Remove
-              </Button>
+              {info?.status === "accepted" ? (
+                <Button
+                  onClick={() =>
+                    navigate(`/dashboard/wishlist/make-offer/${info._id}`)
+                  }
+                  sx={{ borderRadius: "30px", mx: "auto" }}
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  endIcon={<RequestQuoteIcon></RequestQuoteIcon>}
+                >
+                  Pay
+                </Button>
+              ) : (
+                <></>
+              )}
             </>
           </CardActions>
         </div>
@@ -121,6 +114,4 @@ export default function OfferedCard({
 
 OfferedCard.propTypes = {
   info: PropTypes.object,
-  handleWishListRemove: PropTypes.func,
-  handlePropertyDelete: PropTypes.func,
 };

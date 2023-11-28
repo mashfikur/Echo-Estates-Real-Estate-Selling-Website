@@ -15,7 +15,7 @@ const MyAddedProperties = () => {
   const navigate = useNavigate();
 
   const { data, isPending, refetch } = useQuery({
-    queryKey: ["added-properties", user?.email],
+    queryKey: ["added-properties", user?.uid],
     queryFn: async () => {
       if (user) {
         const res = await axiosSecure.get(
