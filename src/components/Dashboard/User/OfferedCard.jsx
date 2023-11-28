@@ -16,7 +16,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import TocIcon from "@mui/icons-material/Toc";
 import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 
-export default function PropertyCard({
+export default function OfferedCard({
   info,
   handleWishListRemove,
   handlePropertyDelete,
@@ -41,11 +41,11 @@ export default function PropertyCard({
               <Chip
                 sx={{ textAlign: "end", mt: "1rem" }}
                 size="small"
-                label={info?.verification_status}
+                label={info?.status}
                 color={
-                  info?.verification_status === "pending"
+                  info?.status === "pending"
                     ? "warning"
-                    : info?.verification_status === "verified"
+                    : info?.status === "verified"
                     ? "success"
                     : ""
                 }
@@ -76,88 +76,42 @@ export default function PropertyCard({
             >
               <LocationOnIcon></LocationOnIcon> {info?.property_location}
             </Typography>
-
             <Typography
-              sx={{ mt: "0rem" }}
+              sx={{ mt: "1rem" }}
               variant="subtitle1"
               color="text.secondary"
             >
-              <MonetizationOnIcon></MonetizationOnIcon>{" "}
-              {`$${info?.price_range[0]}k - $${info?.price_range[1]}k`}
+              <LocationOnIcon></LocationOnIcon> Offered Amount :{" "}
+              {info?.offered_price}
             </Typography>
           </CardContent>
         </div>
         {/* card actions */}
         <div className="">
           <CardActions>
-            <div className="flex justify-between  w-full">
-              {location.pathname === "/all-properties" ? (
-                <>
-                  <Link
-                    to={`/all-properties/property/details/${info._id}`}
-                    className="mx-auto"
-                  >
-                    <Button
-                      sx={{
-                        borderRadius: "30px",
-                        mx: "auto",
-                        backgroundColor: "black",
-                      }}
-                      variant="contained"
-                      endIcon={<TocIcon></TocIcon>}
-                    >
-                      Details
-                    </Button>
-                  </Link>
-                </>
-              ) : location.pathname === "/dashboard/wishlist" ? (
-                <>
-                  {" "}
-                  <Button
-                    onClick={() =>
-                      navigate(`/dashboard/wishlist/make-offer/${info._id}`)
-                    }
-                    sx={{ borderRadius: "30px" }}
-                    variant="contained"
-                    color="success"
-                    endIcon={<RequestQuoteIcon></RequestQuoteIcon>}
-                  >
-                    Make An Offer
-                  </Button>
-                  <Button
-                    onClick={() => handleWishListRemove(info._id)}
-                    sx={{ borderRadius: "30px" }}
-                    variant="contained"
-                    endIcon={<DeleteIcon></DeleteIcon>}
-                    color="error"
-                  >
-                    Remove
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button
-                    onClick={() =>
-                      navigate(`/dashboard/update-property/${info._id}`)
-                    }
-                    sx={{ borderRadius: "30px" }}
-                    variant="contained"
-                    endIcon={<BorderColorIcon></BorderColorIcon>}
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    onClick={() => handlePropertyDelete(info._id)}
-                    sx={{ borderRadius: "30px" }}
-                    variant="contained"
-                    endIcon={<DeleteIcon></DeleteIcon>}
-                    color="error"
-                  >
-                    Delete
-                  </Button>
-                </>
-              )}
-            </div>
+            <>
+              {" "}
+              <Button
+                onClick={() =>
+                  navigate(`/dashboard/wishlist/make-offer/${info._id}`)
+                }
+                sx={{ borderRadius: "30px" }}
+                variant="contained"
+                color="success"
+                endIcon={<RequestQuoteIcon></RequestQuoteIcon>}
+              >
+                Make An Offer
+              </Button>
+              <Button
+                onClick={() => handleWishListRemove(info._id)}
+                sx={{ borderRadius: "30px" }}
+                variant="contained"
+                endIcon={<DeleteIcon></DeleteIcon>}
+                color="error"
+              >
+                Remove
+              </Button>
+            </>
           </CardActions>
         </div>
       </div>
@@ -165,7 +119,7 @@ export default function PropertyCard({
   );
 }
 
-PropertyCard.propTypes = {
+OfferedCard.propTypes = {
   info: PropTypes.object,
   handleWishListRemove: PropTypes.func,
   handlePropertyDelete: PropTypes.func,

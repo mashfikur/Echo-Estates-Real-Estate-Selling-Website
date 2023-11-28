@@ -103,13 +103,13 @@ const Links = () => {
             Wishlist
           </NavLink>
           <NavLink
-            to="/demo"
+            to="/dashboard/property-bought"
             className={({ isActive }) => (isActive ? "miniLink" : "")}
           >
             Property Bought
           </NavLink>
           <NavLink
-            to="/demo"
+            to="/dashboard/my-reviews"
             className={({ isActive }) => (isActive ? "miniLink" : "")}
           >
             My Reviews

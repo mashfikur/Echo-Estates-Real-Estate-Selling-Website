@@ -20,6 +20,7 @@ import ManageProperties from "../pages/Admin/ManageProperties";
 import AdvertiseProperty from "../pages/Admin/AdvertiseProperty";
 import AdminRoute from "./AdminRoute";
 import UpdateProperty from "../pages/Agent/UpdateProperty";
+import PropertyBought from "../pages/User/PropertyBought";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MakeOffer></MakeOffer>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/property-bought",
+        element: (
+          <PrivateRoute>
+            <PropertyBought></PropertyBought>
           </PrivateRoute>
         ),
       },

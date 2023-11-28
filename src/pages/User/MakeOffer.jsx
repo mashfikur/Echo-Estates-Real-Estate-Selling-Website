@@ -40,7 +40,7 @@ const MakeOffer = () => {
   }
 
   // creating form
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (formData) => {
     const startingRange = data.price_range[0];
@@ -53,17 +53,27 @@ const MakeOffer = () => {
 
     // adding data to database
     const offered = {
+      property_id: id,
       agent_id: data.agent_id,
+      agent_name: data.agent_name,
+      agent_image: data.agent_image,
       property_title: formData.title,
+      property_image: data.property_image,
       property_location: formData.location,
       buyer_name: formData.buyer_name,
       buyer_email: formData.buyer_email,
       buyer_id: user.uid,
-      offered_price: formData.offered_amount,
+      offered_price: parseFloat(formData.offered_amount),
       buying_date: formData.buying_date,
+      status: "pending",
     };
 
-    console.log(offered);
+    axiosSecure.post("/api/v1/user/offered", offered).then((res) => {
+      if (res.data.insertedId) {
+        toast.success("Successfully Made an offer to the owner");
+        reset();
+      }
+    });
   };
   return (
     <div>
