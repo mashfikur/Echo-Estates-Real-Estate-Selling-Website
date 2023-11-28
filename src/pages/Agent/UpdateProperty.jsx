@@ -63,7 +63,7 @@ const UpdateProperty = () => {
             };
 
             axiosSecure
-              .patch(`/api/v1/user/update-user/${id}`, updated_info)
+              .patch(`/api/v1/agent/update-property/${id}`, updated_info)
               .then((res) => {
                 if (res.data.modifiedCount) {
                   toast.success("Updated Property Successfully");
@@ -89,7 +89,7 @@ const UpdateProperty = () => {
       };
 
       axiosSecure
-        .patch(`/api/v1/user/update-user/${id}`, updated_info)
+        .patch(`/api/v1/agent/update-property/${id}`, updated_info)
         .then((res) => {
           if (res.data.modifiedCount) {
             toast.success("Updated Property Successfully");

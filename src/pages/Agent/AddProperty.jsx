@@ -54,11 +54,11 @@ const AddProperty = () => {
             price_range: value,
             verification_status: "pending",
             isfraud: "false",
-            isAdvertised:"false",
+            isAdvertised: "false",
           };
 
           axiosSecure
-            .post("/api/v1/user/add-property", info)
+            .post("/api/v1/agent/add-property", info)
             .then((res) => {
               if (res.data.insertedId) {
                 reset();

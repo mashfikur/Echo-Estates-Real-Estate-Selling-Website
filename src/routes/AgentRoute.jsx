@@ -5,8 +5,9 @@ import { Navigate, useLocation } from "react-router-dom";
 import useCheckAgent from "../hooks/useCheckAgent";
 import toast from "react-hot-toast";
 
+
 const AgentRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading,userSignOut } = useAuth();
   const [isAgentData, isAgentLoading] = useCheckAgent();
   const location = useLocation();
 
@@ -31,7 +32,8 @@ const AgentRoute = ({ children }) => {
     return children;
   }
 
-  toast.error("Only Agents can proceed this route");
+  userSignOut()
+  toast.error("Your are not allowed , Login first");
 
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 };

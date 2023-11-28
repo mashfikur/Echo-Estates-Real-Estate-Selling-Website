@@ -6,7 +6,7 @@ import useCheckAdmin from "../hooks/useCheckAdmin";
 import toast from "react-hot-toast";
 
 const AdminRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, loading, userSignOut } = useAuth();
   const [isAdmin, isAdminLoading] = useCheckAdmin();
   const location = useLocation();
 
@@ -31,7 +31,9 @@ const AdminRoute = ({ children }) => {
     return children;
   }
 
-  toast.error("You are not allowed to this route");
+  userSignOut();
+
+  toast.error("Your are not allowed , Login first");
 
   return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 };
