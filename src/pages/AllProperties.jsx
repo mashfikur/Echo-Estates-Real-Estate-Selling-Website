@@ -10,7 +10,7 @@ const AllProperties = () => {
   const { data, isPending } = useQuery({
     queryKey: ["all-properties"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/v1/user/all-properties");
+      const res = await axiosSecure.get("/api/v1/user/verified-properties");
       return res.data;
     },
   });
@@ -44,12 +44,20 @@ const AllProperties = () => {
           </div>
         ) : (
           <Container maxWidth="xl">
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4">
-              {data &&
-                data.map((item) => (
-                  <PropertyCard key={item._id} info={item}></PropertyCard>
-                ))}
-            </div>
+            {data.length ? (
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4">
+                {data &&
+                  data.map((item) => (
+                    <PropertyCard key={item._id} info={item}></PropertyCard>
+                  ))}
+              </div>
+            ) : (
+              <div>
+                <h3 className="text-center font-semibold my-32 text-4xl text-gray-400">
+                  No Property Available
+                </h3>
+              </div>
+            )}
           </Container>
         )}
       </div>

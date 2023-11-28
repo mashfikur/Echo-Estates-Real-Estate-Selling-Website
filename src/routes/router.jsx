@@ -17,6 +17,7 @@ import PropertyDetails from "../pages/PropertyDetails";
 import MakeOffer from "../pages/User/MakeOffer";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageProperties from "../pages/Admin/ManageProperties";
+import AdvertiseProperty from "../pages/Admin/AdvertiseProperty";
 
 const router = createBrowserRouter([
   {
@@ -124,6 +125,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ManageProperties></ManageProperties>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/advertise-properties",
+        element: (
+          <PrivateRoute>
+            <AdvertiseProperty></AdvertiseProperty>
           </PrivateRoute>
         ),
       },

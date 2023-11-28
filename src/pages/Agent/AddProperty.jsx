@@ -54,6 +54,7 @@ const AddProperty = () => {
             price_range: value,
             verification_status: "pending",
             isfraud: false,
+            isAdvertised:false,
           };
 
           axiosSecure

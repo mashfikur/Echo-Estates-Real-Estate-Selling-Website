@@ -69,6 +69,12 @@ const Links = () => {
             Manage Properties
           </NavLink>
           <NavLink
+            className={({ isActive }) => (isActive ? "miniLink" : "")}
+            to="/dashboard/advertise-properties"
+          >
+            Advertise Properties
+          </NavLink>
+          <NavLink
             to="/dashboard/manage-users"
             className={({ isActive }) => (isActive ? "miniLink" : "")}
           >
