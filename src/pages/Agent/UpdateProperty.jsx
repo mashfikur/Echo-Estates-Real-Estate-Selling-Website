@@ -1,7 +1,5 @@
 import SectionHeading from "../../components/Dashboard/SectionHeading";
 import * as React from "react";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import useAuth from "../../hooks/useAuth";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
@@ -23,7 +21,7 @@ const UpdateProperty = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["update-property", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/api/v1/user/property/details/${id}`);
@@ -32,63 +30,77 @@ const UpdateProperty = () => {
   });
 
   const [addingData, setAddingData] = React.useState(null);
-  const [value, setValue] = React.useState([10, 30]);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
 
   // handling form
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = (formData) => {
-    console.log({ ...formData, price: value });
     setAddingData(true);
 
-    // axiosPublic
-    //   .post(
-    //     url,
-    //     { image: data.image[0] },
-    //     {
-    //       headers: {
-    //         "content-type": "multipart/form-data",
-    //       },
-    //     }
-    //   )
-    //   .then((res) => {
-    //     if (res.data.success) {
-    //       // adding to database
-    //       const info = {
-    //         property_title: data.title,
-    //         property_location: data.location,
-    //         property_image: res?.data?.data?.display_url,
-    //         agent_name: data.name,
-    //         agent_image: user.photoURL,
-    //         agent_email: data.email,
-    //         agent_id: user.uid,
-    //         price_range: value,
-    //         verification_status: "pending",
-    //         isfraud: "false",
-    //         isAdvertised: "false",
-    //       };
+    // if the image is updated
+    if (formData.image.length) {
+      axiosPublic
+        .post(
+          url,
+          { image: formData.image[0] },
+          {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data.success) {
+            // adding to database
+            const updated_info = {
+              property_title: formData.title,
+              property_location: formData.location,
+              property_image: res?.data?.data?.display_url,
+              price_range: [
+                parseFloat(formData.start),
+                parseFloat(formData.end),
+              ],
+            };
 
-    //       axiosSecure
-    //         .post("/api/v1/user/add-property", info)
-    //         .then((res) => {
-    //           if (res.data.insertedId) {
-    //             reset();
-    //             setAddingData(false);
-    //             setValue([10, 30]);
-    //             toast.success("Successfully Added Your Property");
-    //           }
-    //         })
-    //         .catch((err) => {
-    //           console.log(err);
-    //         });
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+            axiosSecure
+              .patch(`/api/v1/user/update-user/${id}`, updated_info)
+              .then((res) => {
+                if (res.data.modifiedCount) {
+                  toast.success("Updated Property Successfully");
+                  setAddingData(false);
+                  refetch();
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      // updating the property info if no image is updated
+      const updated_info = {
+        property_title: formData.title,
+        property_image: formData.previous_image,
+        property_location: formData.location,
+        price_range: [parseFloat(formData.start), parseFloat(formData.end)],
+      };
+
+      axiosSecure
+        .patch(`/api/v1/user/update-user/${id}`, updated_info)
+        .then((res) => {
+          if (res.data.modifiedCount) {
+            toast.success("Updated Property Successfully");
+            setAddingData(false);
+            refetch();
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -163,7 +175,7 @@ const UpdateProperty = () => {
                     {/* second row */}
                     <div className="flex gap-5   flex-col lg:flex-row items-center">
                       <div className="flex flex-1 scale-90 lg:scale-100 flex-col  ">
-                        <div className="flex flex-col lg:flex-row items-center gap-2">
+                        <div className="flex flex-col xl:flex-row items-center gap-2">
                           <div className="form-control flex-1">
                             <label className="label">
                               <span className="label-text">Previous Image</span>
@@ -193,7 +205,7 @@ const UpdateProperty = () => {
                         </div>
                       </div>
                       <div className="flex-1">
-                        <div className="flex items-center gap-4">
+                        <div className="flex flex-col xl:flex-row items-center gap-4">
                           <div className="form-control flex-1">
                             <label className="label">
                               <span className="label-text">
@@ -202,6 +214,7 @@ const UpdateProperty = () => {
                             </label>
                             <input
                               defaultValue={data?.price_range[0]}
+                              step={0.1}
                               type="number"
                               placeholder="Title"
                               className="input focus:outline-none input-bordered"
@@ -217,6 +230,7 @@ const UpdateProperty = () => {
                             </label>
                             <input
                               defaultValue={data?.price_range[1]}
+                              step={0.1}
                               type="number"
                               placeholder="start"
                               className="input focus:outline-none input-bordered"
@@ -259,6 +273,8 @@ const UpdateProperty = () => {
                         />
                       </div>
                     </div>
+
+                    {/* fourth row */}
                     <div className="form-control ">
                       <button className="btn mx-auto rounded-full px-12 shadow-xl border-none  text-white hover:bg-[#323377] bg-[#323377]">
                         {addingData ? (
