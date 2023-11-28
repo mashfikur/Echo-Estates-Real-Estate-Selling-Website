@@ -3,11 +3,13 @@ import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { ThreeCircles } from "react-loader-spinner";
 import { Button } from "@mui/material";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const ManageProperties = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["agent-propeties"],
     queryFn: async () => {
       const res = await axiosSecure.get("/api/v1/admin/agent-properties");
@@ -15,6 +17,32 @@ const ManageProperties = () => {
       return res.data;
     },
   });
+
+  const handleUpdateProperty = (_id, status) => {
+    const target =
+      status === "verify" ? "verified" : status === "reject" ? "rejected" : "";
+
+    Swal.fire({
+      title: `Do you want to ${status} this property?`,
+      text: "It will update the property!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes , Do it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .patch(`/api/v1/admin/update-property/${_id}?status=${target}`)
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              toast.success(`Successfully Completed`);
+              refetch();
+            }
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -83,11 +111,18 @@ const ManageProperties = () => {
                         </td>
                         <td>
                           {property.verification_status === "verified" ? (
-                            <h1 className="text-center badge badge-success text-lg font-semibold p-3 text-white ">
+                            <h1 className="text-center badge badge-success text-md font-semibold p-3 text-white ">
                               Verified
+                            </h1>
+                          ) : property.verification_status === "rejected" ? (
+                            <h1 className="text-center badge badge-error text-md font-semibold p-3 text-white ">
+                              Rejected
                             </h1>
                           ) : (
                             <Button
+                              onClick={() =>
+                                handleUpdateProperty(property._id, "verify")
+                              }
                               sx={{
                                 borderRadius: "25px",
                                 py: ".6rem",
@@ -104,8 +139,13 @@ const ManageProperties = () => {
                         <td>
                           {property.verification_status === "verified" ? (
                             <></>
+                          ) : property.verification_status === "rejected" ? (
+                            <></>
                           ) : (
                             <Button
+                              onClick={() =>
+                                handleUpdateProperty(property._id, "reject")
+                              }
                               sx={{
                                 borderRadius: "25px",
                                 py: ".6rem",
