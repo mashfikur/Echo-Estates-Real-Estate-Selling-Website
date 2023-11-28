@@ -6,13 +6,15 @@ import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
 import { ThreeCircles } from "react-loader-spinner";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const MyAddedProperties = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, refetch } = useQuery({
     queryKey: ["added-properties", user?.email],
     queryFn: async () => {
       if (user) {
@@ -23,6 +25,32 @@ const MyAddedProperties = () => {
       }
     },
   });
+
+  const handlePropertyDelete = (_id) => {
+    Swal.fire({
+      title: "Do you want to delete this property?",
+      text: "It can't be reverted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes , Delete!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure
+          .delete(`/api/v1/user/delete-property/${_id}`)
+          .then((res) => {
+            if (res.data.deletedCount) {
+              toast.success("Deleted property successfully");
+              refetch();
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+    });
+  };
 
   return (
     <div>
@@ -54,7 +82,11 @@ const MyAddedProperties = () => {
             <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
               {data &&
                 data.map((info, idx) => (
-                  <PropertyCard info={info} key={idx}></PropertyCard>
+                  <PropertyCard
+                    handlePropertyDelete={handlePropertyDelete}
+                    info={info}
+                    key={idx}
+                  ></PropertyCard>
                 ))}
             </div>
           ) : (
