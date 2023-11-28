@@ -3,28 +3,54 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 import PropertyCard from "../components/Dashboard/Agent/PropertyCard";
 import { Container } from "@mui/material";
 import { ThreeCircles } from "react-loader-spinner";
+import { IoIosSearch } from "react-icons/io";
+import { useRef, useState } from "react";
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
-
+  const [input, setInput] = useState("");
+  const searchRef = useRef();
   const { data, isPending } = useQuery({
-    queryKey: ["all-properties"],
+    queryKey: ["all-properties", input],
     queryFn: async () => {
-      const res = await axiosSecure.get("/api/v1/user/verified-properties");
+      const res = await axiosSecure.get(
+        `/api/v1/user/verified-properties?search=${input}`
+      );
       return res.data;
     },
   });
 
+  const handleSearch = () => {
+    const value = searchRef.current.value;
+    setInput(value);
+  };
+
   return (
     <div className="min-h-screen mt-28">
-      <h3 className="text-center font-playfair text-4xl lg:text-6xl">
-        All Properties
-      </h3>
-
-      <p className="text-center p-4 lg:p-0 font-semibold capitalize lg:my-8 text-gray-400">
-        welcome to a seamless home-buying experience , Browse from our
-        collection for your Dream Property{" "}
-      </p>
+      <div>
+        <div>
+          <h3 className="text-center font-playfair text-4xl lg:text-6xl">
+            All Properties
+          </h3>
+        </div>
+        <p className="text-center p-4 lg:p-0 font-semibold capitalize lg:my-4 text-gray-400">
+          welcome to a seamless home-buying experience , Browse from our
+          collection for your Dream Property{" "}
+        </p>
+        {/* search bar  */}
+        <div className="flex justify-center items-center">
+          <input
+            onChange={handleSearch}
+            ref={searchRef}
+            type="text"
+            placeholder="Search title..."
+            className="input input-bordered focus:outline-main  rounded-full block md:w-[40%] lg:w-[20%]"
+          />
+          <div className="-ml-10">
+            <IoIosSearch className="text-2xl"></IoIosSearch>
+          </div>
+        </div>
+      </div>
 
       <div className="my-12">
         {isPending ? (

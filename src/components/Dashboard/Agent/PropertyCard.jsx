@@ -25,7 +25,7 @@ export default function PropertyCard({
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ maxWidth: 345, mx: "auto" }}>
+    <Card sx={{ width: 345, mx: "auto" }}>
       <div className="flex flex-col relative">
         {/* card header */}
         <div>
@@ -65,7 +65,7 @@ export default function PropertyCard({
         {/* card content */}
         <div>
           <CardContent>
-            <Typography variant="h5">{info?.property_title}</Typography>
+            <Typography height={70} variant="h5">{info?.property_title}</Typography>
 
             <Typography
               sx={{ mt: "1rem" }}

@@ -77,7 +77,7 @@ const MyAddedProperties = () => {
           />
         </div>
       ) : (
-        <div className=" max-w-6xl mt-12 mx-auto">
+        <div className=" max-w-6xl my-12 mx-auto">
           {data.length > 0 ? (
             <div className="grid  grid-cols-1 gap-10 lg:gap-5 lg:grid-cols-2 xl:grid-cols-3">
               {data &&
