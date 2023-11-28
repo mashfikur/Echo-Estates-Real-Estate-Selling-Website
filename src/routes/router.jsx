@@ -18,6 +18,7 @@ import MakeOffer from "../pages/User/MakeOffer";
 import ManageUsers from "../pages/Admin/ManageUsers";
 import ManageProperties from "../pages/Admin/ManageProperties";
 import AdvertiseProperty from "../pages/Admin/AdvertiseProperty";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -115,25 +116,25 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/manage-users",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ManageUsers></ManageUsers>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/manage-properties",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <ManageProperties></ManageProperties>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
       {
         path: "/dashboard/advertise-properties",
         element: (
-          <PrivateRoute>
+          <AdminRoute>
             <AdvertiseProperty></AdvertiseProperty>
-          </PrivateRoute>
+          </AdminRoute>
         ),
       },
     ],

@@ -53,8 +53,8 @@ const AddProperty = () => {
             agent_id: user.uid,
             price_range: value,
             verification_status: "pending",
-            isfraud: false,
-            isAdvertised:false,
+            isfraud: "false",
+            isAdvertised:"false",
           };
 
           axiosSecure
