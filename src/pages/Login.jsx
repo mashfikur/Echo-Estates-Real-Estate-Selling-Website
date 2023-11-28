@@ -6,11 +6,13 @@ import { useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const { userSignIn, googleUserAuth, setLoading } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -35,6 +37,13 @@ const Login = () => {
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);
           navigate(from, { replace: true });
+
+          //creating token
+          axiosSecure
+            .post("/api/v1/auth/create-token", { uid: result.user.uid })
+            .then((res) => {
+              localStorage.setItem("token", res.data.token);
+            });
         });
       })
       .catch((err) => {
@@ -58,6 +67,13 @@ const Login = () => {
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);
           navigate(from, { replace: true });
+
+          //creating token
+          axiosSecure
+            .post("/api/v1/auth/create-token", { uid: result.user.uid })
+            .then((res) => {
+              localStorage.setItem("token", res.data.token);
+            });
         });
       })
       .catch((err) => {

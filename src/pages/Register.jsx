@@ -9,11 +9,13 @@ import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { updateProfile } from "firebase/auth";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Register = () => {
   const [showPass, setShowPass, setLoading] = useState(false);
   const { user, setUser, createUser, googleUserAuth } = useAuth();
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
   const {
     register,
@@ -54,6 +56,13 @@ const Register = () => {
             axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
               if (res.data.insertedId) {
                 navigate("/");
+
+                //creating token
+                axiosSecure
+                  .post("/api/v1/auth/create-token", { uid: result.user.uid })
+                  .then((res) => {
+                    localStorage.setItem("token", res.data.token);
+                  });
               }
             });
           })
@@ -83,6 +92,13 @@ const Register = () => {
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);
           navigate("/");
+
+          //creating token
+          axiosSecure
+            .post("/api/v1/auth/create-token", { uid: result.user.uid })
+            .then((res) => {
+              localStorage.setItem("token", res.data.token);
+            });
         });
       })
       .catch((err) => {
