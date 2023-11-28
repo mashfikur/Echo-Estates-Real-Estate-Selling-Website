@@ -14,6 +14,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useCheckAdmin from "../hooks/useCheckAdmin";
 import useCheckAgent from "../hooks/useCheckAgent";
+import Reviews from "../components/Home/Reviews";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -162,12 +163,7 @@ const PropertyDetails = () => {
           )}
 
           {/* users review */}
-          <div className=" min-h-screen">
-            <h3 className="text-white font-semibold underline text-4xl text-center">
-              Property Reviews
-            </h3>
-            <div className="py-40">review cards</div>
-          </div>
+         <Reviews></Reviews>
         </Container>
       </div>
     </div>
