@@ -91,7 +91,8 @@ export default function PropertyCard({
         <div className="">
           <CardActions>
             <div className="flex justify-between  w-full">
-              {location.pathname === "/all-properties" ? (
+              {location.pathname === "/all-properties" ||
+              location.pathname === "/" ? (
                 <>
                   <Link
                     to={`/all-properties/property/details/${info._id}`}

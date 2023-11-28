@@ -12,12 +12,16 @@ import { useEffect } from "react";
 import toast from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useCheckAdmin from "../hooks/useCheckAdmin";
+import useCheckAgent from "../hooks/useCheckAgent";
 
 const PropertyDetails = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
+  const [isAdmin] = useCheckAdmin();
+  const [isAgentData] = useCheckAgent();
 
   const { data, isPending } = useQuery({
     queryKey: ["property", id],
@@ -37,7 +41,7 @@ const PropertyDetails = () => {
 
   // Add Button Event handler
   const handleAddToWishList = () => {
-    console.log(user,'real')
+    console.log(user, "real");
     const info = {
       property_id: id,
       wishlisted_by: user.uid,
@@ -133,6 +137,7 @@ const PropertyDetails = () => {
                 </div>
                 <div className=" mt-10 lg:mt-14 mx-auto ">
                   <Button
+                    disabled={isAdmin || isAgentData?.isAgent}
                     onClick={handleAddToWishList}
                     sx={{
                       padding: ".7rem 1rem",
@@ -161,7 +166,7 @@ const PropertyDetails = () => {
             <h3 className="text-white font-semibold underline text-4xl text-center">
               Property Reviews
             </h3>
-            <div className="py-40">reviw cards</div>
+            <div className="py-40">review cards</div>
           </div>
         </Container>
       </div>

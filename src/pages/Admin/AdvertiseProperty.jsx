@@ -20,9 +20,9 @@ const AdvertiseProperty = () => {
   const handleUpdateProperty = (_id, status) => {
     if (status) {
       if (
-        data.filter((property) => property.isAdvertised === "true").length >= 1
+        data.filter((property) => property.isAdvertised === "true").length >= 6
       ) {
-        return toast.error("You can't advertise more than 1 property");
+        return toast.error("You can't advertise more than 6 property");
       }
     }
 
