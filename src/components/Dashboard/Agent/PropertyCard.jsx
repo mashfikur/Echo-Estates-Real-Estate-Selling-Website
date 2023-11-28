@@ -47,7 +47,7 @@ export default function PropertyCard({
                     ? "warning"
                     : info?.verification_status === "verified"
                     ? "success"
-                    : ""
+                    : info?.verification_status === "rejected" && "error"
                 }
               ></Chip>
             }

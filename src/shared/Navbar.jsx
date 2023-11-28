@@ -55,6 +55,7 @@ function Navbar(props) {
     userSignOut()
       .then(() => {
         toast.success("Logged Out Successfully");
+        navigate("/");
       })
       .catch((err) => {
         toast.error(err.code);

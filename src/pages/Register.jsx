@@ -13,7 +13,7 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const Register = () => {
   const [showPass, setShowPass, setLoading] = useState(false);
-  const { user, setUser, createUser, googleUserAuth } = useAuth();
+  const { setUser, createUser, googleUserAuth } = useAuth();
   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ const Register = () => {
     //creating user in firebase
     createUser(data.email, data.password)
       .then((result) => {
+        const userNew = result.user;
         toast.success("Created Account Successfully");
         // updating user info to firebase
         updateProfile(result.user, {
@@ -38,7 +39,7 @@ const Register = () => {
         })
           .then(() => {
             setUser({
-              ...user,
+              ...userNew,
               displayName: data.name,
               photoURL: data.photo,
               email: data?.email,

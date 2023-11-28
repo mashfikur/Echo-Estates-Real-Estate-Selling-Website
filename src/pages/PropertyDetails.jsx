@@ -37,6 +37,7 @@ const PropertyDetails = () => {
 
   // Add Button Event handler
   const handleAddToWishList = () => {
+    console.log(user,'real')
     const info = {
       property_id: id,
       wishlisted_by: user.uid,

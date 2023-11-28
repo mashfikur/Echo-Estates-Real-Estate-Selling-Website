@@ -61,6 +61,27 @@ const ManageUsers = () => {
     });
   };
 
+  const handleMakeFraud = (_id) => {
+    Swal.fire({
+      title: "Do you want to identify this user as a fraud?",
+      text: "It can't be reverted!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes , Delete!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.post(`/api/v1/admin/make-fraud/${_id}`).then((res) => {
+          if (res.data.deletedCount) {
+            toast.success(`Marked as Fraud`);
+            refetch();
+          }
+        });
+      }
+    });
+  };
+
   return (
     <div>
       <SectionHeading title={"Manage Users"}></SectionHeading>
@@ -188,9 +209,7 @@ const ManageUsers = () => {
                         <td>
                           {user.role === "agent" && (
                             <Button
-                              onClick={() =>
-                                handleUpdateUser(user.userId, "fraud")
-                              }
+                              onClick={() => handleMakeFraud(user.userId)}
                               sx={{ borderRadius: "25px", py: ".6rem" }}
                               variant="contained"
                               size="small"
