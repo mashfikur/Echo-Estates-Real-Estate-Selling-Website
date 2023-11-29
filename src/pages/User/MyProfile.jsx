@@ -3,7 +3,6 @@ import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAuth from "../../hooks/useAuth";
 import useCheckAgent from "../../hooks/useCheckAgent";
 import useCheckAdmin from "../../hooks/useCheckAdmin";
-import { Button } from "@mui/material";
 import EditProfile from "../../components/Dashboard/User/EditProfile";
 
 const MyProfile = () => {

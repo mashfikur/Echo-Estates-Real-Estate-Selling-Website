@@ -24,6 +24,7 @@ import PropertyBought from "../pages/User/PropertyBought";
 import RequestedProperties from "../pages/Agent/RequestedProperties";
 import MyReviews from "../pages/User/MyReviews";
 import ManageReviews from "../pages/Admin/ManageReviews";
+import Payment from "../pages/User/Payment";
 
 const router = createBrowserRouter([
   {
@@ -107,6 +108,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <PropertyBought></PropertyBought>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
           </PrivateRoute>
         ),
       },

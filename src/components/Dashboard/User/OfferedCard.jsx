@@ -90,9 +90,7 @@ export default function OfferedCard({ info }) {
             <>
               {info?.status === "accepted" ? (
                 <Button
-                  onClick={() =>
-                    navigate(`/dashboard/wishlist/make-offer/${info._id}`)
-                  }
+                  onClick={() => navigate(`/dashboard/payment/${info._id}`)}
                   sx={{ borderRadius: "30px", mx: "auto" }}
                   variant="contained"
                   color="primary"

@@ -52,7 +52,7 @@ const PropertyBought = () => {
           <div className="grid grid-cols-1 gap-7 lg:gap-4  lg:grid-cols-2 xl:grid-cols-3">
             {data &&
               data.map((item) => (
-                <OfferedCard key={item._id} info={item}></OfferedCard>
+                <OfferedCard property_id={item._id} key={item._id} info={item}></OfferedCard>
               ))}
           </div>
         ) : (

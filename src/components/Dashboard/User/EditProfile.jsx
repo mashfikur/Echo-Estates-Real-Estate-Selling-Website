@@ -6,12 +6,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { updateProfile, getAuth } from "firebase/auth";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
-import { useState } from "react";
 const apiKey = import.meta.env.VITE_IMAGE_API_KEY;
 const url = `https://api.imgbb.com/1/upload?key=${apiKey}`;
 
