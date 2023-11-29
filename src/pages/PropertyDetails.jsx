@@ -75,7 +75,7 @@ const PropertyDetails = () => {
           {/* details  */}
 
           {isPending ? (
-            <div className="mt-32 min-h-screen flex items-center justify-center ">
+            <div className="min-h-screen flex items-center justify-center ">
               <ThreeCircles
                 height="100"
                 width="100"
@@ -178,7 +178,6 @@ const PropertyDetails = () => {
               ></Reviews>
             )
           )}
-          
         </Container>
       </div>
     </div>
