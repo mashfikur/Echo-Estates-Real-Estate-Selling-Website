@@ -14,6 +14,7 @@ const CheckOutForm = ({ property }) => {
   const axiosSecure = useAxiosSecure();
   const offered_price = property?.offered_price;
   const { user } = useAuth();
+  const [paying, setPaying] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ const CheckOutForm = ({ property }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setPaying(true);
 
     if (!stripe || !elements) {
       return;
@@ -86,6 +88,7 @@ const CheckOutForm = ({ property }) => {
           )
           .then((res) => {
             if (res.data.modifiedCount) {
+              setPaying(false);
               toast.success("Your transaction is Successfully completed");
               navigate(-1);
             }
@@ -94,35 +97,40 @@ const CheckOutForm = ({ property }) => {
     }
   };
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <CardElement
-          options={{
-            style: {
-              base: {
-                fontSize: "16px",
-                color: "#424770",
-                "::placeholder": {
-                  color: "#aab7c4",
+    <div className="p-1  lg:px-6">
+      <div className="border-2 border-main rounded-md py-4 lg:px-5 lg:py-6">
+        <form onSubmit={handleSubmit}>
+          <CardElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
                 },
               },
-              invalid: {
-                color: "#9e2146",
-              },
-            },
-          }}
-        ></CardElement>
-        <div className="mt-20  text-center">
-          <button
-            className="btn btn-neutral  px-12 rounded-full"
-            disabled={!stripe || !clientSecret}
-            type="submit"
-          >
-            Pay ${offered_price}k
-          </button>
-          <p className="text-red-500 font-semibold mt-6"> {error && error} </p>
-        </div>
-      </form>
+            }}
+          ></CardElement>
+          <div className="mt-20  text-center">
+            <button
+              className="btn btn-neutral  px-12 rounded-full"
+              disabled={!stripe || !clientSecret}
+              type="submit"
+            >
+              {paying ? "Paying..." : `Pay $${offered_price}k`}
+            </button>
+            <p className="text-red-500 font-semibold mt-6">
+              {" "}
+              {error && error}{" "}
+            </p>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

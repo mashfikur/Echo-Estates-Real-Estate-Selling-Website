@@ -5,21 +5,24 @@ import { Container } from "@mui/material";
 import { ThreeCircles } from "react-loader-spinner";
 import { IoIosSearch } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
+import SortButton from "../components/Home/SortButton";
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
   const [input, setInput] = useState("");
   const searchRef = useRef();
+  const [sort, setSort] = useState("");
+  console.log(sort);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   const { data, isPending } = useQuery({
-    queryKey: ["all-properties", input],
+    queryKey: ["all-properties", input, sort],
     queryFn: async () => {
       const res = await axiosSecure.get(
-        `/api/v1/user/verified-properties?search=${input}`
+        `/api/v1/user/verified-properties?search=${input}&sort=${sort}`
       );
       return res.data;
     },
@@ -43,16 +46,21 @@ const AllProperties = () => {
           collection for your Dream Property{" "}
         </p>
         {/* search bar  */}
-        <div className="flex justify-center items-center">
-          <input
-            onChange={handleSearch}
-            ref={searchRef}
-            type="text"
-            placeholder="Search title..."
-            className="input input-bordered focus:outline-main  rounded-full block md:w-[40%] lg:w-[20%]"
-          />
-          <div className="-ml-10">
-            <IoIosSearch className="text-2xl"></IoIosSearch>
+        <div className="relative">
+          <div className="flex justify-center items-center">
+            <input
+              onChange={handleSearch}
+              ref={searchRef}
+              type="text"
+              placeholder="Search title..."
+              className="input input-bordered focus:outline-main  rounded-full block md:w-[40%] lg:w-[20%]"
+            />
+            <div className="-ml-10">
+              <IoIosSearch className="text-2xl"></IoIosSearch>
+            </div>
+          </div>
+          <div className=" flex justify-center my-4 -mb-8  xl:absolute right-1/2  xl:right-8 xl:-top-4">
+            <SortButton sort={sort} setSort={setSort}></SortButton>
           </div>
         </div>
       </div>
