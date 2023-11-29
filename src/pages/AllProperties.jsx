@@ -43,7 +43,7 @@ const AllProperties = () => {
         </div>
         <p className="text-center p-4 lg:p-0 font-semibold capitalize lg:my-4 text-gray-400">
           welcome to a seamless home-buying experience , Browse from our
-          collection for your Dream Property{" "}
+          collection for your Dream Property{""}
         </p>
         {/* search bar  */}
         <div className="relative">
