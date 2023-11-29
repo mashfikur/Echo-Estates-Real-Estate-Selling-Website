@@ -7,13 +7,13 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CommentIcon from "@mui/icons-material/Comment";
 import Rating from "@mui/material/Rating";
 
 export default function ReviewCard({ review, handleDelete }) {
   const location = useLocation();
-  const navigate = useNavigate();
+
   const time = new Date(review.review_time).toLocaleString();
   const hour = time.split(":")[0];
   const min = time.split(":")[1];
@@ -42,10 +42,15 @@ export default function ReviewCard({ review, handleDelete }) {
         <div>
           <CardContent>
             {(location.pathname === "/" ||
-              location.pathname === "/dashboard/my-reviews") && (
-              <Typography height={70} sx={{ fontWeight: "600" }} variant="h5">
-                {review?.property_title}
-              </Typography>
+              location.pathname === "/dashboard/my-reviews" ||
+              location.pathname === "/dashboard/manage-reviews") && (
+              <Link
+                to={`/all-properties/property/details/${review.property_id}`}
+              >
+                <Typography height={70} sx={{ fontWeight: "600" }} variant="h5">
+                  {review?.property_title}
+                </Typography>
+              </Link>
             )}
 
             <h3 className="text-gray-400  font-semibold">
@@ -61,7 +66,8 @@ export default function ReviewCard({ review, handleDelete }) {
         <div className="">
           <CardActions>
             <div className="flex justify-between  w-full">
-              {location.pathname === "/dashboard/my-reviews" && (
+              {(location.pathname === "/dashboard/my-reviews" ||
+                location.pathname === "/dashboard/manage-reviews") && (
                 <Button
                   onClick={() => handleDelete(review._id)}
                   sx={{

@@ -7,17 +7,15 @@ import ReviewCard from "../../components/Home/ReviewCard";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 
-const MyReviews = () => {
+const ManageReviews = () => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
   const { data, isPending, refetch } = useQuery({
-    queryKey: ["single-user-review", user?.uid],
+    queryKey: ["admin-reviews", user?.uid],
     queryFn: async () => {
       if (user) {
-        const res = await axiosSecure.get(
-          `/api/v1/user/get-reviews/${user.uid}`
-        );
+        const res = await axiosSecure.get(`/api/v1/admin/get-reviews`);
         return res.data;
       }
     },
@@ -46,12 +44,7 @@ const MyReviews = () => {
 
   return (
     <div>
-      <SectionHeading title={"My Reviews"}></SectionHeading>
-
-      <h3 className="text-center font-semibold text-gray-400 ">
-        Here you can find all the reviews you have made about {"someone's"}{" "}
-        property and manage them
-      </h3>
+      <SectionHeading title={"Manage Reviews"}></SectionHeading>
 
       <div className="max-w-6xl mx-auto">
         {isPending ? (
@@ -70,7 +63,7 @@ const MyReviews = () => {
             />
           </div>
         ) : data.length ? (
-          <div className="grid grid-cols-1  gap-5 xl:gap-20 lg:grid-cols-2 xl:grid-cols-3 my-20">
+          <div className="grid grid-cols-1  gap-5 xl:gap-10 lg:grid-cols-2 xl:grid-cols-3 my-20">
             {data &&
               data.map((review) => (
                 <ReviewCard
@@ -84,7 +77,7 @@ const MyReviews = () => {
           <div className="mt-32">
             {" "}
             <h3 className="text-center text-gray-400 capitalize font-semibold text-4xl">
-              {"You didn't make any reviews"}
+              {"No reviews Available"}
             </h3>{" "}
           </div>
         )}
@@ -93,4 +86,4 @@ const MyReviews = () => {
   );
 };
 
-export default MyReviews;
+export default ManageReviews;

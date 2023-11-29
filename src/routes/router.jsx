@@ -23,6 +23,7 @@ import UpdateProperty from "../pages/Agent/UpdateProperty";
 import PropertyBought from "../pages/User/PropertyBought";
 import RequestedProperties from "../pages/Agent/RequestedProperties";
 import MyReviews from "../pages/User/MyReviews";
+import ManageReviews from "../pages/Admin/ManageReviews";
 
 const router = createBrowserRouter([
   {
@@ -162,6 +163,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageProperties></ManageProperties>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "/dashboard/manage-reviews",
+        element: (
+          <AdminRoute>
+            <ManageReviews></ManageReviews>
           </AdminRoute>
         ),
       },
