@@ -8,11 +8,14 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import PropTypes from "prop-types";
+import Rating from "@mui/material/Rating";
 export default function ReviewDialog({
   reviewRef,
   handleSubmit,
   open,
   setOpen,
+  value,
+  setValue,
 }) {
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,10 +35,29 @@ export default function ReviewDialog({
         Add a Review
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Property Review</DialogTitle>
+        <DialogTitle
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexDirection: { xs: "column", sm: "row" },
+          }}
+        >
+          Property Review{" "}
+          <Rating
+            name="simple-controlled"
+            value={value}
+            onChange={(event, newValue) => {
+              if (newValue) {
+                setValue(newValue);
+              }
+            }}
+          />{" "}
+        </DialogTitle>
+
         <DialogContent>
           <DialogContentText>
-            Share your thoughts ! What do you love think about this property?
+            Share your thoughts ! What do you think about this property?
           </DialogContentText>
           <TextField
             autoFocus
@@ -76,5 +98,7 @@ ReviewDialog.propTypes = {
   reviewRef: PropTypes.object,
   handleSubmit: PropTypes.func,
   open: PropTypes.bool,
+  value: PropTypes.number,
   setOpen: PropTypes.func,
+  setValue: PropTypes.func,
 };
