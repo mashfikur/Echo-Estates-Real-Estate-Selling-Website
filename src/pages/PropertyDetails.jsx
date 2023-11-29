@@ -24,6 +24,10 @@ const PropertyDetails = () => {
   const [isAdmin] = useCheckAdmin();
   const [isAgentData] = useCheckAgent();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { data, isPending } = useQuery({
     queryKey: ["property", id],
     queryFn: async () => {
@@ -174,6 +178,7 @@ const PropertyDetails = () => {
               ></Reviews>
             )
           )}
+          
         </Container>
       </div>
     </div>

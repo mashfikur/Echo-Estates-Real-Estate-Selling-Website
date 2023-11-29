@@ -4,12 +4,17 @@ import PropertyCard from "../components/Dashboard/Agent/PropertyCard";
 import { Container } from "@mui/material";
 import { ThreeCircles } from "react-loader-spinner";
 import { IoIosSearch } from "react-icons/io";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
   const [input, setInput] = useState("");
   const searchRef = useRef();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { data, isPending } = useQuery({
     queryKey: ["all-properties", input],
     queryFn: async () => {

@@ -5,7 +5,6 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import PropTypes from "prop-types";
 import { Button, Chip } from "@mui/material";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -30,11 +29,7 @@ export default function PropertyCard({
         {/* card header */}
         <div>
           <CardHeader
-            avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="User Photo">
-                <img src={info?.agent_image} alt="" />
-              </Avatar>
-            }
+            avatar={<Avatar src={info?.agent_image} alt="owner_image"></Avatar>}
             title={<h1 className="text-base font-bold">{info?.agent_name}</h1>}
             subheader={<h3 className="">Property Owner</h3>}
             action={

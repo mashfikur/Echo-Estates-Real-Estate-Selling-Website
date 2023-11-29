@@ -1,26 +1,23 @@
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
-import { red } from "@mui/material/colors";
 import PropTypes from "prop-types";
-import { Button, Chip } from "@mui/material";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { Button } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import TocIcon from "@mui/icons-material/Toc";
-import RequestQuoteIcon from "@mui/icons-material/RequestQuote";
 import CommentIcon from "@mui/icons-material/Comment";
 import Rating from "@mui/material/Rating";
 
-export default function ReviewCard({ review }) {
+export default function ReviewCard({ review, handleDelete }) {
   const location = useLocation();
   const navigate = useNavigate();
+  const time = new Date(review.review_time).toLocaleString();
+  const hour = time.split(":")[0];
+  const min = time.split(":")[1];
+  const part = time.split(":")[2].split(" ")[1];
 
   return (
     <Card sx={{ width: { sm: 300, lg: 345, xs: 345 }, mx: "auto" }}>
@@ -29,20 +26,23 @@ export default function ReviewCard({ review }) {
         <div>
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="User Photo">
-                <img src={review?.reviewer_image} alt="reviewer_image" />
-              </Avatar>
+              <Avatar
+                src={review?.reviewer_image}
+                alt="reviewer_image"
+              ></Avatar>
             }
             title={
               <h1 className="text-base font-bold">{review?.reviewer_name}</h1>
             }
             action={<Rating name="read-only" value={review?.rating} readOnly />}
+            subheader={`${hour}:${min}${part}`}
           />
         </div>
         {/* card content */}
         <div>
           <CardContent>
-            {location.pathname === "/" && (
+            {(location.pathname === "/" ||
+              location.pathname === "/dashboard/my-reviews") && (
               <Typography height={70} sx={{ fontWeight: "600" }} variant="h5">
                 {review?.property_title}
               </Typography>
@@ -63,6 +63,7 @@ export default function ReviewCard({ review }) {
             <div className="flex justify-between  w-full">
               {location.pathname === "/dashboard/my-reviews" && (
                 <Button
+                  onClick={() => handleDelete(review._id)}
                   sx={{
                     borderRadius: "30px",
                     mx: "auto",
@@ -84,4 +85,5 @@ export default function ReviewCard({ review }) {
 
 ReviewCard.propTypes = {
   review: PropTypes.object,
+  handleDelete: PropTypes.func,
 };
