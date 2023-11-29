@@ -71,107 +71,112 @@ const RequestedProperties = () => {
             middleCircleColor=""
           />
         </div>
-      ) : (
-        data && (
-          <div className="max-w-6xl mx-auto">
-            {data.length && (
-              <div className="flex px-4 lg:flex-row flex-col gap-3 items-center justify-between   text-3xl mt-16">
-                <h3>Total Property : {data.length} </h3>
-                <h3>
-                  Verified Property :{" "}
-                  {
-                    data.filter(
-                      (property) => property.verification_status === "verified"
-                    ).length
-                  }{" "}
-                </h3>
-              </div>
-            )}
+      ) : data.length ? (
+        <div className="max-w-6xl mx-auto">
+          {data.length ? (
+            <div className="flex px-4 lg:flex-row flex-col gap-3 items-center justify-between   text-3xl mt-16">
+              <h3>Total Property : {data.length} </h3>
+              <h3>
+                Accepted Property :{" "}
+                {
+                  data.filter((property) => property.status === "accepted")
+                    .length
+                }{" "}
+              </h3>
+            </div>
+          ) : (
+            <></>
+          )}
 
-            <div className="mt-8 px-2 mb-10 ">
-              <div className=" border-main border-2 shadow-lg rounded-md h-[80vh] lg:h-[60vh] overflow-auto">
-                <table className="table text-base font-semibold  ">
-                  {/* head */}
-                  <thead className="text-lg sticky top-0 bg-blue-950 text-white z-50 ">
-                    <tr>
-                      <th></th>
-                      <th>Property Title</th>
-                      <th>Property Locaiton</th>
-                      <th>Buyer name</th>
-                      <th>Buyer email</th>
-                      <th>Offered Price</th>
-                      <th></th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {/* row 1 */}
-                    {data &&
-                      data.map((property, idx) => (
-                        <tr key={property._id}>
-                          <th> {idx + 1} </th>
-                          <td> {property.property_title} </td>
-                          <td>{property.property_location}</td>
-                          <td className="text-center">{property.buyer_name}</td>
-                          <td>{property.buyer_email}</td>
-                          <td className="text-center">
-                            ${property.offered_price}k
+          <div className="mt-8 px-2 mb-10 ">
+            <div className=" border-main border-2 shadow-lg rounded-md h-[80vh] lg:h-[60vh] overflow-auto">
+              <table className="table text-base font-semibold  ">
+                {/* head */}
+                <thead className="text-lg sticky top-0 bg-blue-950 text-white z-50 ">
+                  <tr>
+                    <th></th>
+                    <th>Property Title</th>
+                    <th>Property Locaiton</th>
+                    <th>Buyer name</th>
+                    <th>Buyer email</th>
+                    <th>Offered Price</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {/* row 1 */}
+                  {data &&
+                    data.map((property, idx) => (
+                      <tr key={property._id}>
+                        <th> {idx + 1} </th>
+                        <td> {property.property_title} </td>
+                        <td>{property.property_location}</td>
+                        <td className="text-center">{property.buyer_name}</td>
+                        <td>{property.buyer_email}</td>
+                        <td className="text-center">
+                          ${property.offered_price}k
+                        </td>
+
+                        {property.status === "accepted" ? (
+                          <td>
+                            {" "}
+                            <div className="badge badge-success text-white py-3">
+                              Accepted
+                            </div>{" "}
                           </td>
-
-                          {property.status === "accepted" ? (
+                        ) : property.status === "rejected" ? (
+                          <td>
+                            {" "}
+                            <div className="badge badge-error text-white py-3">
+                              Rejected
+                            </div>
+                          </td>
+                        ) : (
+                          <>
                             <td>
                               {" "}
-                              <div className="badge badge-success text-white py-3">
-                                Accepted
-                              </div>{" "}
+                              <button
+                                onClick={() =>
+                                  handleConfirmProperty(
+                                    property._id,
+                                    "accepted"
+                                  )
+                                }
+                                className="btn btn-success rounded-full shadow-lg text-white"
+                              >
+                                Accept
+                              </button>{" "}
                             </td>
-                          ) : property.status === "rejected" ? (
                             <td>
                               {" "}
-                              <div className="badge badge-error text-white py-3">
-                                Rejected
-                              </div>
+                              <button
+                                onClick={() =>
+                                  handleConfirmProperty(
+                                    property._id,
+                                    "rejected"
+                                  )
+                                }
+                                className="btn btn-error rounded-full shadow-lg text-white"
+                              >
+                                Reject
+                              </button>{" "}
                             </td>
-                          ) : (
-                            <>
-                              <td>
-                                {" "}
-                                <button
-                                  onClick={() =>
-                                    handleConfirmProperty(
-                                      property._id,
-                                      "accepted"
-                                    )
-                                  }
-                                  className="btn btn-success rounded-full shadow-lg text-white"
-                                >
-                                  Accept
-                                </button>{" "}
-                              </td>
-                              <td>
-                                {" "}
-                                <button
-                                  onClick={() =>
-                                    handleConfirmProperty(
-                                      property._id,
-                                      "rejected"
-                                    )
-                                  }
-                                  className="btn btn-error rounded-full shadow-lg text-white"
-                                >
-                                  Reject
-                                </button>{" "}
-                              </td>
-                            </>
-                          )}
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
+                          </>
+                        )}
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </div>
           </div>
-        )
+        </div>
+      ) : (
+        <div>
+          <h3 className="text-center text-4xl mt-20 text-gray-400 font-semibold">
+            No properties requested yet{" "}
+          </h3>
+        </div>
       )}
     </div>
   );

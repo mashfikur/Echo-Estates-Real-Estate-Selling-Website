@@ -7,7 +7,7 @@ import Marquee from "react-fast-marquee";
 
 const LatestReviews = () => {
   const axiosPublic = useAxiosPublic();
-  const { data, isPending, refetch } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["latest-reviews"],
     queryFn: async () => {
       const res = await axiosPublic.get(`/api/v1/public/get-reviews`);

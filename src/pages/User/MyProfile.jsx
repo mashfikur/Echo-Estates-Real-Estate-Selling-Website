@@ -3,6 +3,8 @@ import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAuth from "../../hooks/useAuth";
 import useCheckAgent from "../../hooks/useCheckAgent";
 import useCheckAdmin from "../../hooks/useCheckAdmin";
+import { Button } from "@mui/material";
+import EditProfile from "../../components/Dashboard/User/EditProfile";
 
 const MyProfile = () => {
   const { user, loading } = useAuth();
@@ -51,8 +53,12 @@ const MyProfile = () => {
                   {`${month} ${date} , ${year}`}{" "}
                 </h3>
               </div>
+              <div>
+                <EditProfile></EditProfile>
+              </div>
             </div>
             <div className="flex-1 flex flex-col items-center gap-5">
+              <div></div>
               <img
                 className="mx-auto w-[15rem] h-[15rem] object-cover rounded-full"
                 src={user?.photoURL}
