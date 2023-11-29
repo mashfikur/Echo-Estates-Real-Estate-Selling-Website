@@ -5,6 +5,7 @@ import CheckOutForm from "./CheckOutForm";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 const stripePromise = loadStripe(import.meta.env.VITE_PUBLISHABLE_KEY);
 
@@ -25,6 +26,9 @@ const Payment = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Payment </title>
+      </Helmet>
       <SectionHeading title={"Payment"}></SectionHeading>
       <div className="mt-10 text-center">
         <h3 className="capitalize font-semibold t">

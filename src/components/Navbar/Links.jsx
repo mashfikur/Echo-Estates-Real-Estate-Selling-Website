@@ -44,13 +44,13 @@ const Links = () => {
             to="/dashboard/sold-properties"
             className={({ isActive }) => (isActive ? "miniLink" : "")}
           >
-            My Sold properties
+            My Sold Properties
           </NavLink>
           <NavLink
             to="/dashboard/requested-properties"
             className={({ isActive }) => (isActive ? "miniLink" : "")}
           >
-            Requested properties
+            Requested Properties
           </NavLink>
         </List>
       ) : isAdmin ? (

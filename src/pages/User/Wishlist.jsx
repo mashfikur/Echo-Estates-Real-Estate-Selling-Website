@@ -6,6 +6,7 @@ import PropertyCard from "../../components/Dashboard/Agent/PropertyCard";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import { ThreeCircles } from "react-loader-spinner";
+import { Helmet } from "react-helmet-async";
 
 const Wishlist = () => {
   const { user } = useAuth();
@@ -47,6 +48,9 @@ const Wishlist = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Wishlist </title>
+      </Helmet>
       <SectionHeading title={"Wishlist"}></SectionHeading>
       <p className="text-center font-semibold text-gray-400 my-6 text-lg">
         Browse all of your wishlisted properties here . Choose what you want to

@@ -5,6 +5,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageProperties = () => {
   const axiosSecure = useAxiosSecure();
@@ -46,6 +47,9 @@ const ManageProperties = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Manage Properties </title>
+      </Helmet>
       <SectionHeading title={"Manage Properties"}></SectionHeading>
 
       {isPending ? (

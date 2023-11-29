@@ -36,13 +36,12 @@ const Login = () => {
 
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);
-          navigate(from, { replace: true });
-
           //creating token
           axiosSecure
             .post("/api/v1/auth/create-token", { uid: result.user.uid })
             .then((res) => {
               localStorage.setItem("token", res.data.token);
+              navigate(from, { replace: true });
             });
         });
       })
@@ -66,13 +65,12 @@ const Login = () => {
         };
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);
-          navigate(from, { replace: true });
-
           //creating token
           axiosSecure
             .post("/api/v1/auth/create-token", { uid: result.user.uid })
             .then((res) => {
               localStorage.setItem("token", res.data.token);
+              navigate(from, { replace: true });
             });
         });
       })

@@ -4,6 +4,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { ThreeCircles } from "react-loader-spinner";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AdvertiseProperty = () => {
   const axiosSecure = useAxiosSecure();
@@ -52,6 +53,9 @@ const AdvertiseProperty = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Advertise Properties </title>
+      </Helmet>
       <SectionHeading title={"Advertise Properties"}></SectionHeading>
 
       {isPending ? (

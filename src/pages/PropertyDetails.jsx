@@ -15,6 +15,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import useCheckAdmin from "../hooks/useCheckAdmin";
 import useCheckAgent from "../hooks/useCheckAgent";
 import Reviews from "../components/Home/Reviews";
+import { Helmet } from "react-helmet-async";
 
 const PropertyDetails = () => {
   const { id } = useParams();
@@ -70,6 +71,9 @@ const PropertyDetails = () => {
 
   return (
     <div className="  lg:mt-20 details-banner">
+      <Helmet>d
+        <title>Echo Estates | Property Details </title>
+      </Helmet>
       <div className="pt-28 lg:pt-0">
         <Container maxWidth="xl">
           {/* details  */}

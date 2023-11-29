@@ -8,6 +8,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
 import { RotatingLines } from "react-loader-spinner";
+import { Helmet } from "react-helmet-async";
 
 const apiKey = import.meta.env.VITE_IMAGE_API_KEY;
 const url = `https://api.imgbb.com/1/upload?key=${apiKey}`;
@@ -79,6 +80,9 @@ const AddProperty = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Add Property </title>
+      </Helmet>
       <SectionHeading title={"Add Property"}></SectionHeading>
 
       <h3 className="text-center font-semibold text-gray-400 ">

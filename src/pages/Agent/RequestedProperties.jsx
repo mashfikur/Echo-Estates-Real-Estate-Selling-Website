@@ -5,6 +5,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const RequestedProperties = () => {
   const axiosSecure = useAxiosSecure();
@@ -50,6 +51,9 @@ const RequestedProperties = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Requested Properties </title>
+      </Helmet>
       <SectionHeading title={"Requested Properties"}></SectionHeading>
 
       <h3 className="text-center font-semibold text-gray-400 ">

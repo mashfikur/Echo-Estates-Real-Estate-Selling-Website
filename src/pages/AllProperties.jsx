@@ -6,6 +6,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import { IoIosSearch } from "react-icons/io";
 import { useEffect, useRef, useState } from "react";
 import SortButton from "../components/Home/SortButton";
+import { Helmet } from "react-helmet-async";
 
 const AllProperties = () => {
   const axiosSecure = useAxiosSecure();
@@ -35,6 +36,9 @@ const AllProperties = () => {
 
   return (
     <div className="min-h-screen mt-28">
+      <Helmet>
+        <title>Echo Estates | All Properties </title>
+      </Helmet>
       <div>
         <div>
           <h3 className="text-center font-playfair text-4xl lg:text-6xl">

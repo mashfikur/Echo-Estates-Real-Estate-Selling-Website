@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { ThreeCircles } from "react-loader-spinner";
 import OfferedCard from "../../components/Dashboard/User/OfferedCard";
+import { Helmet } from "react-helmet-async";
 
 const PropertyBought = () => {
   const { user } = useAuth();
@@ -24,6 +25,9 @@ const PropertyBought = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Property Bought </title>
+      </Helmet>
       <SectionHeading title={"Property Bought"}></SectionHeading>
       <p className="text-center font-semibold text-gray-400 my-6 text-lg">
         Browse all of your offered properties here . Wait for {"Owner's"}{" "}
@@ -52,7 +56,11 @@ const PropertyBought = () => {
           <div className="grid grid-cols-1 gap-7 lg:gap-4  lg:grid-cols-2 xl:grid-cols-3">
             {data &&
               data.map((item) => (
-                <OfferedCard property_id={item._id} key={item._id} info={item}></OfferedCard>
+                <OfferedCard
+                  property_id={item._id}
+                  key={item._id}
+                  info={item}
+                ></OfferedCard>
               ))}
           </div>
         ) : (

@@ -6,6 +6,7 @@ import { ThreeCircles } from "react-loader-spinner";
 import ReviewCard from "../../components/Home/ReviewCard";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageReviews = () => {
   const { user } = useAuth();
@@ -44,6 +45,9 @@ const ManageReviews = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Manage Reviews </title>
+      </Helmet>
       <SectionHeading title={"Manage Reviews"}></SectionHeading>
 
       <div className="max-w-6xl mx-auto">

@@ -8,6 +8,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyAddedProperties = () => {
   const { user } = useAuth();
@@ -54,6 +55,9 @@ const MyAddedProperties = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Added Properties </title>
+      </Helmet>
       <SectionHeading title={"My Added Properties"}> </SectionHeading>
 
       <h3 className="text-center font-semibold text-gray-400 ">

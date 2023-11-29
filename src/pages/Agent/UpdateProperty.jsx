@@ -10,6 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Helmet } from "react-helmet-async";
 
 const apiKey = import.meta.env.VITE_IMAGE_API_KEY;
 const url = `https://api.imgbb.com/1/upload?key=${apiKey}`;
@@ -105,6 +106,9 @@ const UpdateProperty = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Update Property </title>
+      </Helmet>
       <SectionHeading title={"Update Property"}></SectionHeading>
 
       {isPending ? (

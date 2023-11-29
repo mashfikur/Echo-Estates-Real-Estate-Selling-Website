@@ -3,6 +3,7 @@ import SectionHeading from "../../components/Dashboard/SectionHeading";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { ThreeCircles } from "react-loader-spinner";
 import useAuth from "../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const MySoldProperties = () => {
   const axiosSecure = useAxiosSecure();
@@ -23,6 +24,9 @@ const MySoldProperties = () => {
 
   return (
     <div>
+       <Helmet>
+        <title>Echo Estates | Sold Properties </title>
+      </Helmet>
       <SectionHeading title={"Sold Properties"}></SectionHeading>
 
       <h3 className="text-center font-semibold text-gray-400 ">

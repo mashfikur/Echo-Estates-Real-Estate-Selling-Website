@@ -1,10 +1,14 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../shared/Sidebar";
 import ResponsiveBar from "../shared/ResponsiveBar";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   return (
     <div className="min-h-screen ">
+      <Helmet>
+        <title>Echo Estates | Dashboard </title>
+      </Helmet>
       <div className=" hidden md:grid-cols-12   md:grid ">
         <div className=" md:col-span-3 xl:col-span-2">
           <Sidebar></Sidebar>

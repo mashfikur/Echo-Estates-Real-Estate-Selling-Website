@@ -4,6 +4,7 @@ import useAuth from "../../hooks/useAuth";
 import useCheckAgent from "../../hooks/useCheckAgent";
 import useCheckAdmin from "../../hooks/useCheckAdmin";
 import EditProfile from "../../components/Dashboard/User/EditProfile";
+import { Helmet } from "react-helmet-async";
 
 const MyProfile = () => {
   const { user, loading } = useAuth();
@@ -16,6 +17,12 @@ const MyProfile = () => {
 
   return (
     <div className="my-20">
+
+      <Helmet>
+        <title>Echo Estates | My Proifle </title>
+      </Helmet>
+
+
       <SectionHeading title={"My Profile"}></SectionHeading>
 
       {loading ? (

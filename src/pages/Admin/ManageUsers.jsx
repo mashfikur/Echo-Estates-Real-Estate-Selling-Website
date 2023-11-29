@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ThreeCircles } from "react-loader-spinner";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const ManageUsers = () => {
   const axiosSecure = useAxiosSecure();
@@ -84,6 +85,9 @@ const ManageUsers = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Echo Estates | Manage Users </title>
+      </Helmet>
       <SectionHeading title={"Manage Users"}></SectionHeading>
 
       {isPending ? (
