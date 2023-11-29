@@ -99,6 +99,13 @@ export default function OfferedCard({ info }) {
                 >
                   Pay
                 </Button>
+              ) : info?.status === "bought" ? (
+                <div className="text-center -mt-2 w-full flex justify-center flex-col items-center">
+                  <h3 className="text-sm font-bold text-gray-500">
+                    Transaction Id
+                  </h3>
+                  <Chip color="success" label={`${info?.tranx_id}`} />
+                </div>
               ) : (
                 <></>
               )}

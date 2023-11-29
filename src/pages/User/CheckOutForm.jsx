@@ -4,6 +4,8 @@ import { useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import PropTypes from "prop-types";
 import useAuth from "../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const CheckOutForm = ({ property }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -12,6 +14,8 @@ const CheckOutForm = ({ property }) => {
   const axiosSecure = useAxiosSecure();
   const offered_price = property?.offered_price;
   const { user } = useAuth();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosSecure
@@ -68,6 +72,24 @@ const CheckOutForm = ({ property }) => {
       console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
         console.log("transaction id", paymentIntent.id);
+
+        // update the property status in databse
+        const updatedProperty = {
+          ...property,
+          tranx_id: paymentIntent.id,
+        };
+
+        axiosSecure
+          .put(
+            `/api/v1/user/completed-transaction/${property._id}`,
+            updatedProperty
+          )
+          .then((res) => {
+            if (res.data.modifiedCount) {
+              toast.success("Your transaction is Successfully completed");
+              navigate(-1);
+            }
+          });
       }
     }
   };

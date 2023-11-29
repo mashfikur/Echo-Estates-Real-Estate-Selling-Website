@@ -1,4 +1,3 @@
-import React from "react";
 import SectionHeading from "../../components/Dashboard/SectionHeading";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
