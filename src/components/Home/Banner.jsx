@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 
 import ExploreIcon from "@mui/icons-material/Explore";
+import { scroller } from "react-scroll";
 
 const Banner = () => {
   const itemData = [
@@ -17,9 +18,17 @@ const Banner = () => {
     "https://images.unsplash.com/photo-1448630360428-65456885c650?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJlYWwlMjBlc3RhdGV8ZW58MHx8MHx8fDA%3D",
   ];
 
+  const scrollToComponent = (componentId) => {
+    scroller.scrollTo(componentId, {
+      duration: 800,
+      delay: 0,
+      smooth: "easeInOutQuart",
+    });
+  };
+
   return (
     <div className="banner">
-      <Container sx={{ pt: { xs: "7rem",md:"10rem" } }} maxWidth="xl">
+      <Container sx={{ pt: { xs: "7rem", md: "10rem" } }} maxWidth="xl">
         <Grid container spacing={4}>
           <Grid item xs={12} md={7}>
             <Typography
@@ -33,6 +42,7 @@ const Banner = () => {
             </Typography>
 
             <Button
+              onClick={() => scrollToComponent("advertisement")}
               sx={{
                 borderRadius: "1.5rem",
                 mt: "1.5rem",

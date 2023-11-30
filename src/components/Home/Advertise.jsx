@@ -17,7 +17,7 @@ const Advertise = () => {
   });
 
   return (
-    <div className="my-20">
+    <div id="advertisement" className="my-20">
       <Container maxWidth="xl">
         <Typography
           sx={{

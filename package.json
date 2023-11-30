@@ -34,6 +34,7 @@
     "react-leaflet": "^4.2.1",
     "react-loader-spinner": "^5.4.5",
     "react-router-dom": "^6.20.0",
+    "react-scroll": "^1.9.0",
     "sort-by": "^1.2.0",
     "sweetalert2": "^11.10.1"
   },

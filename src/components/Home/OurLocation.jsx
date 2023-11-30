@@ -4,6 +4,8 @@ import "leaflet/dist/leaflet.css";
 import NearMeIcon from "@mui/icons-material/NearMe";
 import { useRef } from "react";
 import toast from "react-hot-toast";
+import L from "leaflet";
+import markerIcon from "../../assets/images/location.png";
 const OurLocation = () => {
   const locationRef = useRef();
   const handleRequest = () => {
@@ -12,6 +14,14 @@ const OurLocation = () => {
       toast.success("We will review your request");
     }, 500);
   };
+
+  // Create the custom marker icon
+  const customMarkerIcon = new L.Icon({
+    iconUrl: markerIcon,
+    iconSize: [32, 34],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+  });
 
   const position = [40.712776, -74.005974];
   const position2 = [40.744459, -73.982708];
@@ -61,19 +71,19 @@ const OurLocation = () => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              <Marker position={position}>
+              <Marker icon={customMarkerIcon} position={position}>
                 <Popup>Location 1</Popup>
               </Marker>
-              <Marker position={position2}>
+              <Marker icon={customMarkerIcon} position={position2}>
                 <Popup>Location 2</Popup>
               </Marker>
-              <Marker position={position3}>
+              <Marker icon={customMarkerIcon} position={position3}>
                 <Popup>Location 3</Popup>
               </Marker>
-              <Marker position={position4}>
+              <Marker icon={customMarkerIcon} position={position4}>
                 <Popup>Location 4</Popup>
               </Marker>
-              <Marker position={position5}>
+              <Marker icon={customMarkerIcon} position={position5}>
                 <Popup>Location 5</Popup>
               </Marker>
             </MapContainer>
