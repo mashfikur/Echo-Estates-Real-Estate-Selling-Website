@@ -13,7 +13,6 @@ const AllProperties = () => {
   const [input, setInput] = useState("");
   const searchRef = useRef();
   const [sort, setSort] = useState("");
-  console.log(sort);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -35,17 +34,17 @@ const AllProperties = () => {
   };
 
   return (
-    <div className="min-h-screen mt-28">
+    <div className="all-banner py-28 ">
       <Helmet>
         <title>Echo Estates | All Properties </title>
       </Helmet>
       <div>
         <div>
-          <h3 className="text-center font-playfair text-4xl lg:text-6xl">
+          <h3 className="text-center text-white font-playfair text-4xl lg:text-6xl">
             All Properties
           </h3>
         </div>
-        <p className="text-center p-4 lg:p-0 font-semibold capitalize lg:my-4 text-gray-400">
+        <p className="text-center p-4 lg:p-0 font-semibold capitalize lg:my-4 text-white">
           welcome to a seamless home-buying experience , Browse from our
           collection for your Dream Property{""}
         </p>
@@ -75,7 +74,7 @@ const AllProperties = () => {
             <ThreeCircles
               height="100"
               width="100"
-              color="#A9BEDA"
+              color="white"
               wrapperStyle={{}}
               wrapperClass=""
               visible={true}

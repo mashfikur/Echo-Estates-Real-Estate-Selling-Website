@@ -4,6 +4,8 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ReviewCard from "./ReviewCard";
 import { ThreeCircles } from "react-loader-spinner";
 import Marquee from "react-fast-marquee";
+import starLeft from "../../assets/images/star.svg";
+import starRight from "../../assets/images/star-2.svg";
 
 const LatestReviews = () => {
   const axiosPublic = useAxiosPublic();
@@ -28,7 +30,11 @@ const LatestReviews = () => {
           align="center"
           variant="h3"
         >
-          Latest reviews
+          <div className="flex justify-center space-x-5">
+            <img src={starLeft} alt="star-icon" className="w-16" />
+            <h1>Latest reviews</h1>
+            <img src={starRight} alt="star-icon" className="w-16" />
+          </div>
         </Typography>
         <Typography sx={{ mt: "1.5rem" }} align="center" variant="subtitle1">
           See what our users are saying !

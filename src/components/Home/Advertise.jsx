@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import PropertyCard from "../Dashboard/Agent/PropertyCard";
 import { ThreeCircles } from "react-loader-spinner";
+import arrow from "../../assets/images/arrow.svg";
 
 const Advertise = () => {
   const axiosPublic = useAxiosPublic();
@@ -17,7 +18,8 @@ const Advertise = () => {
   });
 
   return (
-    <div id="advertisement" className="py-20 ad-banner">
+    <div id="advertisement" className="py-20  ad-banner  relative">
+      
       <Container maxWidth="xl">
         <Typography
           sx={{

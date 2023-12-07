@@ -78,6 +78,14 @@ body {
   height: 50vh;
 }
 
+.all-banner {
+  background-image: url("../src/assets/images/gradient-bg.svg");
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
 @media only screen and (max-width: 1024px) {
   .leaflet-container {
     width: 100vw;
