@@ -24,7 +24,7 @@ const RequestedProperties = () => {
     },
   });
 
-  const handleConfirmProperty = (_id, status) => {
+  const handleConfirmProperty = (_id, property_id, status) => {
     Swal.fire({
       title: `Do you want to ${
         status === "accepted" ? "accept" : status === "rejected" ? "reject" : ""
@@ -38,7 +38,9 @@ const RequestedProperties = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure
-          .patch(`/api/v1/agent/change-property-status/${_id}?status=${status}`)
+          .patch(
+            `/api/v1/agent/change-property-status/${_id}?status=${status}&property=${property_id}`
+          )
           .then((res) => {
             if (res.data.modifiedCount) {
               toast.success(`Successfully Completed`);
@@ -129,6 +131,13 @@ const RequestedProperties = () => {
                               Accepted
                             </div>{" "}
                           </td>
+                        ) : property.status === "bought" ? (
+                          <td>
+                            {" "}
+                            <div className="badge badge-warning text-white py-3 px-6">
+                              sold
+                            </div>{" "}
+                          </td>
                         ) : property.status === "rejected" ? (
                           <td>
                             {" "}
@@ -144,6 +153,7 @@ const RequestedProperties = () => {
                                 onClick={() =>
                                   handleConfirmProperty(
                                     property._id,
+                                    property.property_id,
                                     "accepted"
                                   )
                                 }
@@ -158,6 +168,7 @@ const RequestedProperties = () => {
                                 onClick={() =>
                                   handleConfirmProperty(
                                     property._id,
+                                    property.property_id,
                                     "rejected"
                                   )
                                 }

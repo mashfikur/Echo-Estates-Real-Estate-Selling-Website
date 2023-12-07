@@ -20,7 +20,13 @@ export default function ReviewCard({ review, handleDelete }) {
   const part = time.split(":")[2].split(" ")[1];
 
   return (
-    <Card sx={{ width: { sm: 300, lg: 345, xs: 345 }, mx: "auto" }}>
+    <Card
+      sx={{
+        width: { sm: 300, lg: 345, xs: 345 },
+        mx: "auto",
+        borderRadius: "20px",
+      }}
+    >
       <div className="flex flex-col relative">
         {/* card header */}
         <div>
