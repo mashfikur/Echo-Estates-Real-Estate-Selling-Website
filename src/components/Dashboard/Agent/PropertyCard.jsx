@@ -24,7 +24,14 @@ export default function PropertyCard({
   const navigate = useNavigate();
 
   return (
-    <Card sx={{ width: { sm: 300, lg: 345, xs: 345 }, mx: "auto" }}>
+    <Card
+      className="  "
+      sx={{
+        width: { sm: 300, lg: 345, xs: 345 },
+        mx: "auto",
+        borderRadius: "20px",
+      }}
+    >
       <div className="flex flex-col relative">
         {/* card header */}
         <div>

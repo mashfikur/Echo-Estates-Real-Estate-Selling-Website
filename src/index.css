@@ -35,11 +35,9 @@ body {
   background-size: cover;
 }
 
-.active button {
-  font-weight: 700;
-  padding: 0.5rem 1.5rem;
+.active {
   transition: 300ms ease-out;
-  border-bottom: 4px solid green;
+  border-bottom: 5px solid green;
 }
 
 .sideLink {

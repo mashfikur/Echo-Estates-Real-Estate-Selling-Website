@@ -89,6 +89,12 @@ function Navbar(props) {
           Home
         </NavLink>
         <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "miniLink" : "")}
+        >
+          Blogs
+        </NavLink>
+        <NavLink
           className={({ isActive }) => (isActive ? "miniLink" : "")}
           to="/all-properties"
         >
@@ -201,19 +207,12 @@ function Navbar(props) {
                   fontFamily: '"Libre Franklin", sans-serif',
                 }}
               >
-                <NavLink to="/">
-                  <Button size="sm" sx={{ color: "#000" }}>
-                    Home
-                  </Button>
-                </NavLink>
-                <NavLink to="/all-properties">
-                  <Button size="sm" sx={{ color: "#000" }}>
-                    All Properties
-                  </Button>
-                </NavLink>
-                <NavLink to="/dashboard">
-                  <Button sx={{ color: "#000" }}>Dashboard</Button>
-                </NavLink>
+                <div className="lg:space-x-8 space-x-4 ">
+                  <NavLink to="/">Home</NavLink>
+                  <NavLink to="/blogs">Blogs</NavLink>
+                  <NavLink to="/all-properties">All Properties</NavLink>
+                  <NavLink to="/dashboard">Dashboard </NavLink>
+                </div>
 
                 {loading ? (
                   <ColorRing
