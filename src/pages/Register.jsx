@@ -51,6 +51,7 @@ const Register = () => {
               userName: data.name,
               email: data.email,
               userId: result.user.uid,
+              userImage: result.user.photoURL,
               role: "user",
             };
 

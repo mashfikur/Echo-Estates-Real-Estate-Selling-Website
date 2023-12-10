@@ -26,6 +26,7 @@ import MyReviews from "../pages/User/MyReviews";
 import ManageReviews from "../pages/Admin/ManageReviews";
 import Payment from "../pages/User/Payment";
 import MySoldProperties from "../pages/Agent/MySoldProperties";
+import Blogs from "../pages/Blogs";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs></Blogs>,
       },
       {
         path: "/all-properties",

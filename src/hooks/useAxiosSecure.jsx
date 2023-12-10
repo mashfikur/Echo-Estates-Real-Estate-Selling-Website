@@ -7,7 +7,7 @@ const useAxiosSecure = () => {
   const { userSignOut } = useAuth();
   const navigate = useNavigate();
   const axiosSecure = axios.create({
-    baseURL: "https://echo-estates-server.vercel.app",
+    baseURL: "http://localhost:5000",
   });
 
   axiosSecure.interceptors.request.use((config) => {

@@ -19,11 +19,10 @@ const Login = () => {
   const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
-    console.log(data);
-
     // signing in the user
     userSignIn(data.email, data.password)
       .then((result) => {
+        console.log("new", result.user);
         toast.success("Logged in Successfully");
 
         // adding user into database
@@ -31,8 +30,11 @@ const Login = () => {
           userName: result.user.displayName,
           email: data.email,
           userId: result.user.uid,
+          userImage: result.user.photoURL,
           role: "user",
         };
+
+        console.log("logged in", userInfo)
 
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
           console.log(res.data);

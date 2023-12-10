@@ -209,6 +209,7 @@ function Navbar(props) {
               >
                 <div className="lg:space-x-8 space-x-4 ">
                   <NavLink to="/">Home</NavLink>
+                  <NavLink to="/blogs">Blogs</NavLink>
                   <NavLink to="/all-properties">All Properties</NavLink>
                   <NavLink to="/dashboard">Dashboard </NavLink>
                 </div>
