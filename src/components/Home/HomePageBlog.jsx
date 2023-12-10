@@ -10,13 +10,14 @@ const HomepageBlogs = () => {
   const axiosPublic = useAxiosPublic();
 
   const [open, setOpen] = useState(false);
+  const [blogId, setBlogId] = useState("657489033ed9b97755346486");
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (_id) => {
     setOpen(true);
+    setBlogId(_id);
   };
   const handleClose = () => {
     setOpen(false);
-    console.log("close");
   };
 
   const { data } = useQuery({
@@ -55,21 +56,23 @@ const HomepageBlogs = () => {
                     </h2>
                     <div className="card-actions justify-center mt-3">
                       <button
-                        onClick={handleClickOpen}
+                        onClick={() => handleClickOpen(blog._id)}
                         className="btn btn-neutral rounded-full shadow-md border-none px-6 text-white "
                       >
                         Read Blog <MdMenuBook className="text-xl" />{" "}
                       </button>
                     </div>
-                    <BlogModal
-                      open={open}
-                      handleClickOpen={handleClickOpen}
-                      handleClose={handleClose}
-                    ></BlogModal>
                   </div>
                 </div>
               ))}
           </div>
+
+          <BlogModal
+            open={open}
+            handleClickOpen={handleClickOpen}
+            handleClose={handleClose}
+            _id={blogId}
+          ></BlogModal>
 
           <button className="btn shadow-2xl border-none btn-success rounded-lg  text-white font-bold">
             See More <LuArrowUpRight className="text-xl" />{" "}
