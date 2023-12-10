@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MdMenuBook } from "react-icons/md";
 import BlogModal from "../Blog/BlogModal";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const HomepageBlogs = () => {
   const axiosPublic = useAxiosPublic();
@@ -74,9 +75,11 @@ const HomepageBlogs = () => {
             _id={blogId}
           ></BlogModal>
 
-          <button className="btn shadow-2xl border-none btn-success rounded-lg  text-white font-bold">
-            See More <LuArrowUpRight className="text-xl" />{" "}
-          </button>
+          <Link to="/blogs">
+            <button className="btn shadow-2xl border-none btn-success rounded-lg  text-white font-bold">
+              See More <LuArrowUpRight className="text-xl" />{" "}
+            </button>
+          </Link>
         </div>
       </Container>
     </div>
