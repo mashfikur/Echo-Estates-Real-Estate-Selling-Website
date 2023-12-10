@@ -34,10 +34,7 @@ const Login = () => {
           role: "user",
         };
 
-        console.log("logged in", userInfo)
-
-        axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
-          console.log(res.data);
+        axiosPublic.post("/api/v1/add-user", userInfo).then(() => {
           //creating token
           axiosSecure
             .post("/api/v1/auth/create-token", { uid: result.user.uid })
@@ -57,16 +54,17 @@ const Login = () => {
     googleUserAuth()
       .then((result) => {
         toast.success("Logged in Successfully");
+        console.log(result.user.photoURL)
 
         // adding user info to database
         const userInfo = {
           userName: result.user.displayName,
           email: result.user.email,
           userId: result.user.uid,
+          userImage: result.user.photoURL,
           role: "user",
         };
-        axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {
-          console.log(res.data);
+        axiosPublic.post("/api/v1/add-user", userInfo).then(() => {
           //creating token
           axiosSecure
             .post("/api/v1/auth/create-token", { uid: result.user.uid })

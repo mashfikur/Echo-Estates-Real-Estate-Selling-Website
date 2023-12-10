@@ -45,6 +45,7 @@ export default function BlogModal({ open, handleClose, _id }) {
           <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
             {data && data.blog_title}
           </DialogTitle>
+          <hr />
           <IconButton
             aria-label="close"
             onClick={handleClose}
@@ -57,11 +58,12 @@ export default function BlogModal({ open, handleClose, _id }) {
           >
             <CloseIcon />
           </IconButton>
-          <DialogContent dividers>
+          <DialogContent>
             <Typography gutterBottom>
               {data && data.blog_description}
             </Typography>
           </DialogContent>
+
           <DialogActions>
             <Button
               autoFocus
@@ -83,4 +85,5 @@ BlogModal.propTypes = {
   open: PropTypes.bool,
   handleClickOpen: PropTypes.func,
   handleClose: PropTypes.func,
+  _id: PropTypes.string,
 };

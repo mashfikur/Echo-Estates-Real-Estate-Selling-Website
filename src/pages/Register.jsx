@@ -89,6 +89,7 @@ const Register = () => {
           userName: result.user.displayName,
           email: result.user.email,
           userId: result.user.uid,
+          userImage: result.user.photoURL,
           role: "user",
         };
         axiosPublic.post("/api/v1/add-user", userInfo).then((res) => {

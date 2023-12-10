@@ -89,7 +89,7 @@ function Navbar(props) {
           Home
         </NavLink>
         <NavLink
-          to="/"
+          to="/blogs"
           className={({ isActive }) => (isActive ? "miniLink" : "")}
         >
           Blogs
@@ -103,16 +103,21 @@ function Navbar(props) {
         <NavLink to="/dashboard">Dashboard</NavLink>
         {user ? (
           <>
-            <NavLink
+            <Link
               className={"text-red-600 font-semibold"}
               onClick={handleLogOut}
             >
               Logout
-            </NavLink>
+            </Link>
           </>
         ) : (
           <>
-            <NavLink to="/login">Login</NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "miniLink" : "")}
+              to="/login"
+            >
+              Login
+            </NavLink>
           </>
         )}
       </List>
